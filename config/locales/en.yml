@@ -1,3 +1,9 @@
 en:
+  application:
+    log_out: Log out
+
   index:
-    log_in: "Log in"
+    log_in: Log in
+
+  session:
+    failed_to_log_in: Failed to log in

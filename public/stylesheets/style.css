@@ -1,3 +1,22 @@
+a,
+a:visited {
+  font-weight: bold;
+  color: blue;
+  text-decoration: none;
+}
+
+.error {
+    color: red;
+}
+
+.warning {
+    color: #e56717;
+}
+
+.success {
+    color: green;
+}
+
 label,
 div.label {
   display: block;
@@ -13,4 +32,8 @@ input[type=button],
 input[type=submit],
 button {
   margin-top: 1em;
+}
+
+a.logout {
+  float: right;
 }

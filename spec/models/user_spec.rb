@@ -6,12 +6,12 @@ describe User do
     @user = Factory.build(:user)
   end
 
-  describe "validation" do
+  describe "when validating" do
     before do
       @user.should be_valid
     end
 
-    describe "of username" do
+    describe "username" do
       it "may not be null" do
         @user.username = nil
         @user.should have(1).error_on(:username)
@@ -21,9 +21,15 @@ describe User do
         @user.username = ""
         @user.should have(1).error_on(:username)
       end
+
+      it "must be unique" do
+        @user.save
+        user2 = Factory.build(:user, :username => @user.username)
+        user2.should have(1).error_on(:username)
+      end
     end
 
-    describe "of password_hash" do
+    describe "password_hash" do
       it "may be null" do
         @user.password_hash = nil
         @user.should be_valid
@@ -39,15 +45,68 @@ describe User do
   end
 
   describe "password" do
-    it "is not readable" do
-      lambda do
-        @user.password
-      end.should raise_error
+    it "is nil initially" do
+      @user.password.should be_nil
     end
 
-    it "sets the password hash when set" do
+    it "is a transient virtual attribute" do
       @user.password = 'hello'
-      @user.password_hash.should == Digest::SHA1.hexdigest('hello')
+      @user.password.should == 'hello'
+    end
+  end
+
+  describe "password_confirmation" do
+    it "is nil initially" do
+      @user.password_confirmation.should be_nil
+    end
+
+    it "is a transient virtual attribute" do
+      @user.password_confirmation = 'hello'
+      @user.password_confirmation.should == 'hello'
+    end
+  end
+
+  describe "when password and password_confirmation are set" do
+    describe "to the same value" do
+      before do
+        @user.password = 'hello'
+        @user.password_confirmation = 'hello'
+      end
+
+      it "should set the password hash on save" do
+        @user.save!
+        @user.password_hash.should == Digest::SHA1.hexdigest('hello')
+        @user.should_not be_changed
+      end
+    end
+
+    describe "to a different value" do
+      before do
+        @user.password = 'hello'
+        @user.password_confirmation = 'hullo'
+      end
+
+      it "should not set the password hash on save" do
+        @user.save
+        @user.password_hash.should be_nil
+      end
+
+      it "should fail validation" do
+        @user.should_not be_valid
+        @user.should have(1).error_on(:password_confirmation)
+      end
+    end
+  end
+
+  describe "authentication" do
+    it "should return the user if the given user and password are correct" do
+      hashed_password = Digest::SHA1.hexdigest('hello')
+      @user.password_hash = hashed_password
+      @user.save!
+
+      result = User.authenticate(@user.username, 'hello')
+
+      result.should == @user
     end
   end
 

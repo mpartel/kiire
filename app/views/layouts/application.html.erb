@@ -10,6 +10,21 @@
   <%= javascript_include_tag 'jquery-1.4.1.min.js' %>
 </head>
 <body>
+
+  <% if logged_in? %>
+    <%= link_to t("application.log_out"), session_path, :method => 'delete', :class => 'logout' %>
+  <% end %>
+
+  <% unless flash.empty? %>
+    <div id="flash-messages">
+      <% [:success, :notice, :warning, :error].each do |category| %>
+        <% if flash[category] %>
+          <div class="<%= category %>"><%= flash[category] %></div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
   <%= yield %>
 </body>
 </html>
