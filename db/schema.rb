@@ -9,6 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20100215212111) do
+
+  create_table "users", :force => true do |t|
+    t.text     "username",      :null => false
+    t.text     "password_hash"
+    t.text     "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
