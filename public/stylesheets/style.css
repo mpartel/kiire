@@ -1,0 +1,16 @@
+label,
+div.label {
+  display: block;
+  font-weight: bold;
+}
+
+form input,
+form button {
+  display: block;
+}
+
+input[type=button],
+input[type=submit],
+button {
+  margin-top: 1em;
+}

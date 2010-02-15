@@ -1,0 +1,21 @@
+<% form_for :user do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.label :password %>
+  <%= f.text_field :password %>
+
+  <%= f.submit t("index.log_in") %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    username_field = $('#user_username')[0];
+    password_field = $('#user_password')[0];
+    if (username_field) {
+      username_field.focus();
+    } else if (password_field) {
+      password_field.focus();
+    }
+  });
+</script>
