@@ -12,6 +12,7 @@
 ActiveRecord::Schema.define(:version => 20100218224915) do
 
   create_table "places", :force => true do |t|
+    t.integer  "user_id",          :null => false
     t.text     "name",             :null => false
     t.text     "serialized_style"
     t.datetime "created_at"

@@ -112,6 +112,7 @@ describe User do
   end
 
   it "should have settings" do
+    @user.should respond_to(:settings)
     @user.settings.should be_a(Enumerable)
   end
 
@@ -128,6 +129,18 @@ describe User do
     setting.should be_new_record
     @user.save
     setting.should_not be_new_record
+  end
+
+  it "should have places" do
+    @user.should respond_to(:places)
+    @user.places.should be_a(Enumerable)
+  end
+
+  it "should destroy its places when destroyed" do
+    place = Factory.create(:place, :user => @user)
+    @user.places.should include(place)
+    @user.destroy
+    Setting.exists?(place.id).should be_false
   end
 
 end

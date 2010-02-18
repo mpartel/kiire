@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe SessionsController do
+  describe "#new" do
+    it "should render the template" do
+      get :new
+      response.should render_template(:new)
+    end
+  end
+
   describe "#create" do
     before do
       @params = {

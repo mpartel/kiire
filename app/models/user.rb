@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :settings, :dependent => :destroy
+  has_many :places, :dependent => :destroy
 
   validates_presence_of :username
   validates_uniqueness_of :username

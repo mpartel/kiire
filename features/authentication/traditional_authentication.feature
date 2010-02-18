@@ -21,6 +21,6 @@ Feature: Authentication (traditional login)
   Scenario: Logging out
     Given I have logged in
     When I follow "Log out"
-    Then I should be on the home page
+    Then I should be on the login page
     And I should see "Username"
     And I should see "Password"

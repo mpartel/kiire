@@ -10,6 +10,9 @@ module NavigationHelpers
     
     when /the home\s?page/
       '/'
+
+    when /the login page/
+      new_session_path
     
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
