@@ -6,11 +6,12 @@ describe Setting do
   end
 
   it "should belong to a user" do
+    @setting.should respond_to(:user)
     @setting.user.should be_a(User)
   end
 
   describe "when validated" do
-    it "should be valid when constructred by our factory" do
+    it "should be valid when constructred by the factory" do
       @setting.should be_valid
     end
 
