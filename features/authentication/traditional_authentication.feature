@@ -17,3 +17,10 @@ Feature: Authentication (traditional login)
     And I press "Log in"
     Then I should be on the home page
     And I should see "Log out"
+
+  Scenario: Logging out
+    Given I have logged in
+    When I follow "Log out"
+    Then I should be on the home page
+    And I should see "Username"
+    And I should see "Password"
