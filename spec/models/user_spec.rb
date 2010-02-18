@@ -45,24 +45,24 @@ describe User do
   end
 
   describe "password" do
-    it "is nil initially" do
-      @user.password.should be_nil
-    end
-
     it "is a transient virtual attribute" do
       @user.password = 'hello'
       @user.password.should == 'hello'
     end
+
+    it "is initially nil" do
+      @user.password.should be_nil
+    end
   end
 
   describe "password_confirmation" do
-    it "is nil initially" do
-      @user.password_confirmation.should be_nil
-    end
-
     it "is a transient virtual attribute" do
       @user.password_confirmation = 'hello'
       @user.password_confirmation.should == 'hello'
+    end
+
+    it "is initially nil" do
+      @user.password_confirmation.should be_nil
     end
   end
 
@@ -87,8 +87,9 @@ describe User do
       end
 
       it "should not set the password hash on save" do
+        original_hash = @user.password_hash
         @user.save
-        @user.password_hash.should be_nil
+        @user.password_hash.should == original_hash
       end
 
       it "should fail validation" do
