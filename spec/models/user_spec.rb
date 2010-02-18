@@ -111,4 +111,23 @@ describe User do
     end
   end
 
+  it "should have settings" do
+    @user.settings.should be_a(Enumerable)
+  end
+
+  it "should destroy its settings when destroyed" do
+    setting = Factory.create(:setting, :user => @user)
+    @user.settings.should include(setting)
+    @user.destroy
+    Setting.exists?(setting.id).should be_false
+  end
+
+  it "should save its settings when saved" do
+    setting = Factory.build(:setting, :user => @user)
+    @user.settings << setting
+    setting.should be_new_record
+    @user.save
+    setting.should_not be_new_record
+  end
+
 end
