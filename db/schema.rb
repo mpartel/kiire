@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218205803) do
+ActiveRecord::Schema.define(:version => 20100218224915) do
+
+  create_table "places", :force => true do |t|
+    t.text     "name",             :null => false
+    t.text     "serialized_style"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "settings", :force => true do |t|
     t.integer  "user_id",    :null => false
