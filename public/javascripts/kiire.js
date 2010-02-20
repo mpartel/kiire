@@ -78,6 +78,15 @@ $(document).ready(function() {
       });
     }
 
+    this.programEnter = function() {
+      $('input.place').keydown(function(e) {
+        if (e.keyCode == 13) {
+          self.goNow();
+        }
+        return true;
+      });
+    }
+
     this.programGoButton = function() {
       $(this.goButton).click(function() {
         self.goNow();
@@ -91,22 +100,40 @@ $(document).ready(function() {
 
     this.initialize = function() {
       this.programFocus();
+      this.programEnter();
       this.programGoButton();
-      this.clearForm(); // Some browsers store the form values on refresh. We don't want that.'
+      this.clearForm(); // Some browsers store the form values on refresh. We don't want that.
       this.from.focus();
     }
 
+
     this.selectPlace = function(place) {
       this.focusedField.setValue(place.name);
-      if (this.focusedField.theOtherField.isEmpty()) {
-        this.focusedField.theOtherField.focus();
-      } else {
-        this.goButton.focus();
-      }
+      this.focusedField.theOtherField.focus();
     }
 
     this.goNow = function() {
-      //TODO
+      var baseUrl = 'http://www.reittiopas.fi';
+      var params = {
+        from_in: this.from.getValue(),
+        to_in: this.to.getValue(),
+        timetype: 'departure',
+        nroutes: 5
+      };
+
+      var queryString = [];
+      $.each(params, function(key, value) {
+        queryString.push(key + '=' + encodeURIComponent(value));
+      });
+
+      var url = baseUrl + '?' + queryString.join('&');
+
+      $(this.goButton).attr('disabled', 'disabled');
+      setTimeout(function() {
+        $(this.goButton).attr('disabled', '');
+      }, 2000);
+
+      window.location.href = url;
     }
 
     this.initialize();
