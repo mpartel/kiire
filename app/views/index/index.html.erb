@@ -1,5 +1,26 @@
+<%= javascript_include_tag 'kiire.js' %>
+
+<div id="destinations">
+  <div class="place-field-container" id="from-container">
+    <input class="place" type="text" id="from" name="from" />
+  </div>
+  <div class="place-field-container" id="to-container">
+    <input class="place" type="text" id="to" name="from" />
+  </div>
+
+  <button id="go"><%= t("index.go_now") %></button>
+</div>
+
 <ul id="places">
   <% @places.each do |place| %>
-    <li class="place"><%= place.name %></li>
+    <li class="place" id="place-<%= place.id %>"><%= place.name %></li>
   <% end %>
 </ul>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    <% @places.each do |place| %>
+      new Place(<%= place.id %>, <%= place.name.to_json %>);
+    <% end %>
+  });
+</script>

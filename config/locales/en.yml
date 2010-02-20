@@ -4,6 +4,7 @@ en:
 
   index:
     log_in: Log in
+    go_now: GO
 
   session:
     failed_to_log_in: Failed to log in

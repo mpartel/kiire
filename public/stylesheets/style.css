@@ -1,6 +1,10 @@
+body {
+  background-color: white;
+  font-family: "Veranda", "Helvetica", "Arial", sans-serif;
+}
+
 a,
 a:visited {
-  font-weight: bold;
   color: blue;
   text-decoration: none;
 }
@@ -36,4 +40,33 @@ button {
 
 a.logout {
   float: right;
+}
+
+.init-hidden {
+  display: none;
+}
+
+ul#places {
+  display: block;
+}
+
+li.place {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px;
+  cursor: crosshair;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+div.place-field-container {
+  display: inline;
+}
+
+input.place {
+  background-color: #EEEEEE;
+}
+
+input.place:focus {
+  background-color: #AADDFF;
 }
