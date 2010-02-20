@@ -12,7 +12,7 @@
 <body>
 
   <% if logged_in? %>
-    <%= link_to t("application.log_out"), session_path, :method => 'delete', :class => 'logout' %>
+    <%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout' %>
   <% end %>
 
   <% unless flash.empty? %>

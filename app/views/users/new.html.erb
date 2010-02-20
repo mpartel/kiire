@@ -1,0 +1,19 @@
+<h1><%= t("user.registration") %></h1>
+
+<% form_for @user do |f| %>
+  <div>
+    <%= f.label :username, t("user.username") %>
+    <%= f.text_field :username %>
+
+    <%= f.label :username, t("user.email") %>
+    <span><%= t("user.email_description") %></span>
+    <%= f.text_field :email %>
+
+    <%= f.label :password, t("user.password") %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation, t("user.password_confirmation") %>
+    <%= f.password_field :password_confirmation %>
+
+    <%= f.submit t("user.create_account") %>
+  </div>
+<% end %>

@@ -8,3 +8,17 @@ en:
 
   session:
     failed_to_log_in: Failed to log in
+    register: Register
+
+  user:
+    invalid_characters_in_username: must consist of the characters 0-9, a-z, A-Z, -, _
+    password_may_not_be_empty: may not be empty
+    password_confirmation_does_not_match: does not match
+    registration: Registration
+    username: Username
+    email: E-mail
+    email_description: (optional, no spam, for password recovery)
+    password: Password
+    password_confirmation: Password confirmation
+    create_account: Create account
+    account_created: Account created.

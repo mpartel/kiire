@@ -27,6 +27,17 @@ describe User do
         user2 = Factory.build(:user, :username => @user.username)
         user2.should have(1).error_on(:username)
       end
+
+      it "permits only ascii letters, numbers, dashes and underscores" do
+        @user.username = "123_ai-FOO"
+        @user.should have(0).errors_on(:username)
+
+        @user.username = "mää"
+        @user.should have(1).errors_on(:username)
+
+        @user.username = "me/h"
+        @user.should have(1).errors_on(:username)
+      end
     end
 
     describe "password_hash" do
@@ -77,6 +88,17 @@ describe User do
         @user.save!
         @user.password_hash.should == Digest::SHA1.hexdigest('hello')
         @user.should_not be_changed
+      end
+    end
+
+    describe "to the empty string" do
+      before do
+        @user.password = ""
+        @user.password_confirmation = ""
+      end
+
+      it "should fail validation" do
+        @user.should have(1).error_on(:password)
       end
     end
 

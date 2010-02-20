@@ -1,12 +1,15 @@
 <% form_for :user, :url => session_path do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
+  <div id="login-form">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
 
-  <%= f.submit t("index.log_in") %>
+    <%= f.submit t("index.log_in") %>
+  </div>
 <% end %>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -19,3 +22,9 @@
     }
   });
 </script>
+
+<div id="login-links">
+  <% unless logged_in? %>
+    <%= link_to t("session.register"), new_user_path, :id => 'register' %>
+  <% end%>
+</div>

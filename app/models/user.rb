@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
   validates_uniqueness_of :username
+  validate :username_must_be_alphanumeric_with_dashes_and_underscores
 
   attr_accessor :password, :password_confirmation
   validate :password_and_password_confirmation_match
+  validate :password_not_an_empty_string
   before_save :attempt_password_reset
 
   def self.authenticate(username, password)
@@ -19,15 +21,27 @@ class User < ActiveRecord::Base
   end
 
 private
+  def username_must_be_alphanumeric_with_dashes_and_underscores
+    unless username.to_s =~ /^[a-zA-Z0-9_-]*$/
+      errors.add(:username, I18n.t("user.invalid_characters_in_username"))
+    end
+  end
+
   def password_and_password_confirmation_match
-    if @password and @password != @password_confirmation
-      errors.add(:password_confirmation, I18n.t("user.passwords_do_not_match"))
+    if password and password != password_confirmation
+      errors.add(:password_confirmation, I18n.t("user.password_confirmation_does_not_match"))
+    end
+  end
+
+  def password_not_an_empty_string
+    if password == ""
+      errors.add(:password, I18n.t("user.password_may_not_be_empty"))
     end
   end
 
   def attempt_password_reset
-    if @password and @password == @password_confirmation
-      self.password_hash = User.hash_password(@password)
+    if password and password == password_confirmation
+      self.password_hash = User.hash_password(password)
     end
   end
 end

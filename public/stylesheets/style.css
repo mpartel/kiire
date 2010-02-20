@@ -10,15 +10,15 @@ a:visited {
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 .warning {
-    color: #e56717;
+  color: #e56717;
 }
 
 .success {
-    color: green;
+  color: green;
 }
 
 label,
@@ -30,6 +30,7 @@ div.label {
 form input,
 form button {
   display: block;
+  margin-bottom: 0.6em;
 }
 
 input[type=button],
@@ -38,12 +39,22 @@ button {
   margin-top: 1em;
 }
 
-a.logout {
+a#logout {
   float: right;
+}
+
+div#login-links {
+  margin-top: 1.6em;
 }
 
 .init-hidden {
   display: none;
+}
+
+div.fieldWithErrors label {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: red;
 }
 
 ul#places {

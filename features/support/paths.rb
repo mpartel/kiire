@@ -13,6 +13,9 @@ module NavigationHelpers
 
     when /the login page/
       new_session_path
+
+    when /the registration page/
+      new_user_path
     
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
