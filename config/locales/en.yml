@@ -35,6 +35,8 @@ en:
       title: New place
       name: Name
       add_place: Add place
+    options:
+      title: Options
 
   places:
     new_place_added: New place added

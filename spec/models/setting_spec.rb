@@ -42,12 +42,19 @@ describe Setting do
 
   describe "::default_value" do
     before do
-      YAML.stub!(:load_file).with(Setting::DEFAULT_SETTINGS_PATH).and_return({'foo' => 'bar'})
+      configuration = {
+        'foo' => 'bar',
+        'boo' => {
+          'hoo' => 'goo'
+        }
+      }
+      YAML.stub!(:load_file).with(Setting::DEFAULT_SETTINGS_PATH).and_return(configuration)
     end
 
     it "should return the default value from the configuration" do
       Setting.default_value('foo').should == 'bar'
-      Setting.default_value('boo').should == nil
+      Setting.default_value('boo.hoo').should == 'goo'
+      Setting.default_value('moo.moo').should == nil
     end
 
     it "should cache the default value configuration" do

@@ -3,6 +3,7 @@
 
 <h2><%= t("settings.places.title")%></h2>
 
+<div>
 <% unless @places.empty? %>
   <table id="places-manager">
     <% @places.each do |place| %>
@@ -29,6 +30,12 @@
     <%= f.submit t("settings.new_place.add_place") %>
   </div>
 <% end %>
+</div>
+
+<h2><%= t("settings.options.title") %></h2>
+<div>
+  TODO
+</div>
 
 <div class="back">
   <%= link_to t("settings.back"), root_path, :class => "back" %>

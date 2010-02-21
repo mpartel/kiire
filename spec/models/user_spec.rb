@@ -160,15 +160,15 @@ describe User do
 
     it "should return all settings as a hash" do
       s1 = mock_model(Setting, :key => 'foo', :value => 'FOO')
-      s2 = mock_model(Setting, :key => 'bar', :value => 'BAR')
+      s2 = mock_model(Setting, :key => 'bar.baz', :value => 'BAR')
       @user.settings << s1
       @user.settings << s2
-      @user.settings_hash.should == {'foo' => 'FOO', 'bar' => 'BAR'}
+      @user.settings_hash.should == {'foo' => 'FOO', 'bar.baz' => 'BAR'}
     end
 
     it "should return a hash that uses default values for missing settings" do
-      Setting.should_receive(:default_value).with('foo').and_return('bar')
-      @user.settings_hash['foo'].should == 'bar'
+      Setting.should_receive(:default_value).with('foo.bar').and_return('baz')
+      @user.settings_hash['foo.bar'].should == 'baz'
     end
   end
 

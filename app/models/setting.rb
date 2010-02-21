@@ -7,6 +7,18 @@ class Setting < ActiveRecord::Base
 
   def self.default_value(key)
     @default_settings = YAML.load_file(DEFAULT_SETTINGS_PATH) unless @default_settings
-    @default_settings[key.to_s]
+    
+    key = key.to_s
+    
+    p = @default_settings
+    key.split('.').each do |part|
+      if p.is_a? Hash
+        p = p[part]
+      else
+        p = nil
+      end
+    end
+    
+    return p
   end
 end
