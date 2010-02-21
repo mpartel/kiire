@@ -39,4 +39,22 @@ describe Setting do
       s3.should_not be_valid
     end
   end
+
+  describe "::default_value" do
+    before do
+      YAML.stub!(:load_file).with(Setting::DEFAULT_SETTINGS_PATH).and_return({'foo' => 'bar'})
+    end
+
+    it "should return the default value from the configuration" do
+      Setting.default_value('foo').should == 'bar'
+      Setting.default_value('boo').should == nil
+    end
+
+    it "should cache the default value configuration" do
+      YAML.should_receive(:load_file).at_most(1).with(Setting::DEFAULT_SETTINGS_PATH).and_return({'foo' => 'bar'})
+      Setting.default_value('foo')
+      Setting.default_value('foo')
+      Setting.default_value('boo')
+    end
+  end
 end

@@ -153,6 +153,46 @@ describe User do
     setting.should_not be_new_record
   end
 
+  describe "#settings_hash" do
+    before do
+      Setting.stub!(:default_value)
+    end
+
+    it "should return all settings as a hash" do
+      s1 = mock_model(Setting, :key => 'foo', :value => 'FOO')
+      s2 = mock_model(Setting, :key => 'bar', :value => 'BAR')
+      @user.settings << s1
+      @user.settings << s2
+      @user.settings_hash.should == {'foo' => 'FOO', 'bar' => 'BAR'}
+    end
+
+    it "should return a hash that uses default values for missing settings" do
+      Setting.should_receive(:default_value).with('foo').and_return('bar')
+      @user.settings_hash['foo'].should == 'bar'
+    end
+  end
+
+  describe "#settings_hash=" do
+    it "should set all settings from a hash" do
+      given_hash = {
+        'foo' => 'FOO',
+        'bar' => 'BAR'
+      }
+
+      expected_settings = [
+        mock_model(Setting),
+        mock_model(Setting)
+      ]
+
+      Setting.should_receive(:new).with(:user => @user, :key => 'foo', :value => 'FOO').and_return(expected_settings[0])
+      Setting.should_receive(:new).with(:user => @user, :key => 'bar', :value => 'BAR').and_return(expected_settings[1])
+
+      @user.should_receive(:settings=).with(expected_settings)
+
+      @user.settings_hash = given_hash
+    end
+  end
+
   it "should have places" do
     @user.should respond_to(:places)
     @user.places.should be_a(Enumerable)
