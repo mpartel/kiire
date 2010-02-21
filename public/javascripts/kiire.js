@@ -128,11 +128,6 @@ $(document).ready(function() {
 
       var url = baseUrl + '?' + queryString.join('&');
 
-      $(this.goButton).attr('disabled', 'disabled');
-      setTimeout(function() {
-        $(this.goButton).attr('disabled', '');
-      }, 2000);
-
       window.location.href = url;
     }
 
