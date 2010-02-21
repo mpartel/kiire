@@ -1,5 +1,6 @@
 en:
   application:
+    start_page: Main
     settings: Settings
     log_out: Log out
 
