@@ -119,9 +119,10 @@ describe PlacesController do
         }
       }
 
-      settings = mock(Array)
-      @place.stub!(:settings => settings)
-      settings.should_receive(:build).with(:backend => 'some_backend', :key => 'some_setting', :value => 'some_value')
+      setting = mock_model(PlaceSetting)
+      @place.should_receive('get_setting').with('some_setting', 'some_backend').and_return(setting)
+      setting.should_receive(:value=).with('some_value')
+      setting.should_receive(:save!)
 
       @place.should_receive(:update_attributes).with do |arg|
         arg['settings'].should be_nil

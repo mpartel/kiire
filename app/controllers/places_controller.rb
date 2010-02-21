@@ -27,8 +27,10 @@ class PlacesController < ApplicationController
 
     if params[:place][:settings]
       params[:place][:settings].each do |backend, settings|
-        settings.each do |k, v|
-          @place.settings.build :backend => backend, :key => k, :value => v
+        settings.each do |key, value|
+          setting = @place.get_setting(key, backend)
+          setting.value = value
+          setting.save!
         end
       end
       params[:place].delete(:settings)
