@@ -33,11 +33,6 @@ describe Place do
       @place.name = nil
       @place.should have(1).error_on(:name)
     end
-
-    it "should not require a (serialized) style" do
-      @place.serialized_style = nil
-      @place.should be_valid
-    end
   end
 
   describe "#get_setting" do
