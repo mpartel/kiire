@@ -3,6 +3,14 @@ body {
   font-family: "Veranda", "Helvetica", "Arial", sans-serif;
 }
 
+h1 {
+  font-size: 14pt;
+}
+
+h2 {
+  font-size: 12pt;
+}
+
 a,
 a:visited {
   color: blue;
@@ -24,6 +32,7 @@ a:visited {
 label,
 div.label {
   display: block;
+  font-size: 10pt;
   font-weight: bold;
 }
 
@@ -39,16 +48,20 @@ button {
   margin-top: 1em;
 }
 
-a#logout {
+#header {
   float: right;
+}
+
+#header span {
+  margin-right: 2em;
 }
 
 div#login-links {
   margin-top: 1.6em;
 }
 
-.init-hidden {
-  display: none;
+div.back {
+  margin: 0.8em;
 }
 
 div.fieldWithErrors label {

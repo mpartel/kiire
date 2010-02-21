@@ -1,3 +1,5 @@
 module ApplicationHelper
-  include AuthenticationHelper
+  def logged_in?
+    !!controller.send(:current_user)
+  end
 end

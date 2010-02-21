@@ -11,9 +11,12 @@
 </head>
 <body>
 
-  <% if logged_in? %>
-    <%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout' %>
-  <% end %>
+  <div id="header">
+    <% if logged_in? %>
+      <span><%= link_to t("application.settings"), settings_path, :id => "settings-link" %></span>
+      <span><%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout-link' %></span>
+    <% end %>
+  </div>
 
   <% unless flash.empty? %>
     <div id="flash-messages">

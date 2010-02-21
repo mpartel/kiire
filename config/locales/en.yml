@@ -1,5 +1,6 @@
 en:
   application:
+    settings: Settings
     log_out: Log out
 
   index:
@@ -22,3 +23,17 @@ en:
     password_confirmation: Password confirmation
     create_account: Create account
     account_created: Account created.
+
+  settings:
+    title: Settings
+    back: Back
+    places:
+      title: My Places
+    new_place:
+      title: New place
+      name: Name
+      add_place: Add place
+
+  places:
+    new_place_added: New place added
+    failed_to_add_new_place: Failed to add new place

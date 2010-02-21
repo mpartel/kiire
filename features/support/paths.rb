@@ -16,6 +16,9 @@ module NavigationHelpers
 
     when /the registration page/
       new_user_path
+
+    when /the settings page/
+      settings_path
     
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
