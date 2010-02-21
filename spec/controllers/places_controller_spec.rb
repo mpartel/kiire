@@ -45,4 +45,38 @@ describe PlacesController do
       post :create, @params
     end
   end
+
+  describe "#destroy" do
+    before do
+      @params = {
+        :id => '3'
+      }
+
+      @place = mock_model(Place)
+      @place.stub!(:destroy).and_return(true)
+
+      controller.stub_chain(:current_user, :places, :find).with('3').and_return(@place)
+    end
+
+    it "should destroy the given place" do
+      @place.should_receive(:destroy).and_return(true)
+      delete_destroy
+    end
+
+    it "should redirect to the settings page" do
+      delete_destroy
+      response.should redirect_to(settings_path)
+    end
+
+    describe "when successful" do
+      it "should show a success message" do
+        delete_destroy
+        flash[:success].should_not be_nil
+      end
+    end
+
+    def delete_destroy
+      delete :destroy, @params
+    end
+  end
 end

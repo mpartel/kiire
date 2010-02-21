@@ -29,6 +29,8 @@ en:
     back: Back
     places:
       title: My Places
+      delete: delete
+      confirm_delete: Really delete {{place}}?
     new_place:
       title: New place
       name: Name
@@ -37,3 +39,4 @@ en:
   places:
     new_place_added: New place added
     failed_to_add_new_place: Failed to add new place
+    place_deleted: Place deleted

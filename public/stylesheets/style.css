@@ -1,6 +1,6 @@
 body {
   background-color: white;
-  font-family: "Veranda", "Helvetica", "Arial", sans-serif;
+  font-family: "Georgia", "Helvetica", "Arial", sans-serif;
 }
 
 h1 {
@@ -27,6 +27,10 @@ a:visited {
 
 .success {
   color: green;
+}
+
+table td {
+  padding-right: 1em;
 }
 
 label,
@@ -93,4 +97,13 @@ input.place {
 
 input.place:focus {
   background-color: #AADDFF;
+}
+
+table#places-manager td:first-child {
+  padding-right: 2.6em;
+}
+
+a.delete {
+  color: red;
+  font-weight: bold;
 }

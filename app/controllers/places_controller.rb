@@ -9,4 +9,12 @@ class PlacesController < ApplicationController
 
     redirect_to settings_path
   end
+
+  def destroy
+    @place = current_user.places.find(params[:id])
+    if @place.destroy
+      flash[:success] = t("places.place_deleted")
+    end
+    redirect_to settings_path
+  end
 end

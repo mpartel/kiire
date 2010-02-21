@@ -4,11 +4,21 @@
 <h2><%= t("settings.places.title")%></h2>
 
 <% unless @places.empty? %>
-  <ul id="my-places">
+  <table id="places-manager">
     <% @places.each do |place| %>
-      <li><%= place.name  %></li>
+      <tr>
+        <td>
+          <%= h place.name  %>
+        </td>
+        <td class="delete">
+          <%= link_to t("settings.places.delete"), place,
+                      :method => :delete,
+                      :class => :delete,
+                      :confirm => t("settings.places.confirm_delete", :place => h(place.name)) %>
+        </td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 <% end %>
 
 <% form_for @new_place do |f| %>
