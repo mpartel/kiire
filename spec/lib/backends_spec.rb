@@ -18,4 +18,22 @@ describe Backends do
       Backends.by_name("ReittienOpastaja").should == nil
     end
   end
+
+  describe "#all" do
+    it "should return all backend classes" do
+      constants = ["Backend", "Default", "FooBar", "MooFar"]
+      backend = mock(Class)
+      non_backend = mock(Class)
+      backend.stub!(:superclass => Backends::Backend)
+      non_backend.stub!(:superclass => Object)
+
+      Backends.should_receive(:constants).and_return(constants)
+      Backends.stub!(:const_get).with("Backend").and_return(Backends::Backend)
+      Backends.stub!(:const_get).with("Default").and_return(backend)
+      Backends.stub!(:const_get).with("FooBar").and_return(backend)
+      Backends.stub!(:const_get).with("MooFar").and_return(non_backend)
+
+      Backends.all.should == [backend]
+    end
+  end
 end

@@ -12,7 +12,7 @@
           <%= h place.name  %>
         </td>
         <td class="edit">
-          <%= link_to t("settings.places.edit"), place %>
+          <%= link_to t("settings.places.edit"), edit_place_path(place) %>
         </td>
         <td class="delete">
           <%= link_to t("settings.places.delete"), place,

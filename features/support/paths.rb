@@ -19,7 +19,10 @@ module NavigationHelpers
 
     when /the settings page/
       settings_path
-    
+
+    when /the edit page of the place "([^"]*)"/
+      edit_place_path(Place.find_by_name!($1))
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

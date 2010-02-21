@@ -43,6 +43,8 @@ en:
     new_place_added: New place added
     failed_to_add_new_place: Failed to add new place
     place_deleted: Place deleted
+    address_for:
+      reittiopas: Address for Reittiopas
     place_updated: Place updated
     name: Name
     save: Save

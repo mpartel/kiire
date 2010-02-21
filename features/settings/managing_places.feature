@@ -45,3 +45,15 @@ Feature: Managing places
     And I should see "Zork"
     But I should not see "Work"
 
+  Scenario: Assigning a backend name to a place
+    Given I have logged in
+    And I have saved a place "Aukio"
+    And I am on the edit page of the place "Aukio"
+    When I fill in "Mannerheimintie 3 B" for "Address for Reittiopas"
+    And I press "Save"
+    Then I should see "Place updated"
+    When I follow "Back"
+    Then I should be on the settings page
+    And I should see "Aukio"
+    But I should not see "Mannerheimintie 3 B"
+

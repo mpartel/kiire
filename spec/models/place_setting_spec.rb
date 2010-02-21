@@ -53,5 +53,14 @@ describe PlaceSetting do
       @ps.value = nil
       @ps.should have(0).errors_on(:value)
     end
+
+    it "should require that the key is not a duplicate (for the place and backend)" do
+      @ps.save
+      ps2 = Factory.build(:place_setting,
+                          :place_id => @ps.place_id,
+                          :key => @ps.key,
+                          :backend => @ps.backend)
+      ps2.should_not be_valid
+    end
   end
 end

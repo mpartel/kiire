@@ -1,4 +1,4 @@
 module Backends
-  class Reittiopas
+  class Reittiopas < Backend
   end
 end

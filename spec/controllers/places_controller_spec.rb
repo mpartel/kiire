@@ -80,12 +80,12 @@ describe PlacesController do
     end
   end
 
-  describe "#show" do
+  describe "#edit" do
     it "should assign the place" do
       place = mock_model(Place)
       controller.stub_chain(:current_user, :places, :find).with(place.id.to_s).and_return(place)
 
-      get :show, :id => place.id.to_s
+      get :edit, :id => place.id.to_s
 
       assigns[:place].should == place
     end
@@ -112,10 +112,28 @@ describe PlacesController do
       put_update
     end
 
+    it "should update backend-specific place settings if given" do
+      @params['place']['settings'] = {
+        'some_backend' => {
+          'some_setting' => 'some_value'
+        }
+      }
+
+      settings = mock(Array)
+      @place.stub!(:settings => settings)
+      settings.should_receive(:build).with(:backend => 'some_backend', :key => 'some_setting', :value => 'some_value')
+
+      @place.should_receive(:update_attributes).with do |arg|
+        arg['settings'].should be_nil
+      end
+
+      put_update
+    end
+
     describe "when successful" do
-      it "should redirect to the show page" do
+      it "should redirect to the edit page" do
         put_update
-        response.should redirect_to(place_path(@place))
+        response.should redirect_to(edit_place_path(@place))
       end
 
       it "should show a success message" do
@@ -129,10 +147,10 @@ describe PlacesController do
         @place.should_receive(:save).and_return(false)
       end
 
-      it "should rerender the show page with the place" do
+      it "should rerender the edit page with the place" do
         put_update
         assigns[:place].should === @place
-        response.should render_template(:new)
+        response.should render_template(:edit)
       end
     end
 

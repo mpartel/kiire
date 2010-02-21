@@ -1,0 +1,17 @@
+<h1><%= h @place.name %></h1>
+
+<% form_for @place do |f| %>
+  <div>
+    <%= f.label :name, t("places.name") %>
+    <%= f.text_field :name %>
+
+    <% Backends.all.each do |backend| %>
+      <%= label_tag "place_settings_#{backend.name}_address_for", t("places.address_for.#{backend.name}") %>
+      <%= text_field_tag "place[settings[#{backend.name}[address_for]]]", @place.get_setting('address_for', backend.name).value %>
+    <% end %>
+
+    <%= f.submit t("places.save") %>
+  </div>
+<% end %>
+
+<%= link_to t("places.back"), settings_path %>
