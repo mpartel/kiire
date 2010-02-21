@@ -49,7 +49,7 @@ describe PlacesController do
   describe "#destroy" do
     before do
       @params = {
-        :id => '3'
+        'id' => '3'
       }
 
       @place = mock_model(Place)
@@ -77,6 +77,67 @@ describe PlacesController do
 
     def delete_destroy
       delete :destroy, @params
+    end
+  end
+
+  describe "#show" do
+    it "should assign the place" do
+      place = mock_model(Place)
+      controller.stub_chain(:current_user, :places, :find).with(place.id.to_s).and_return(place)
+
+      get :show, :id => place.id.to_s
+
+      assigns[:place].should == place
+    end
+  end
+
+  describe "#update" do
+    before do
+      @place = mock_model(Place)
+      controller.stub_chain(:current_user, :places, :find).with(@place.id.to_s).and_return(@place)
+
+      @params = {
+        'id' => @place.id.to_s,
+        'place' => {
+          'name' => 'New Name'
+        }
+      }
+
+      @place.stub!(:update_attributes)
+      @place.stub!(:save).and_return(true)
+    end
+
+    it "should update the attributes of the place" do
+      @place.should_receive(:update_attributes).with(@params['place'])
+      put_update
+    end
+
+    describe "when successful" do
+      it "should redirect to the show page" do
+        put_update
+        response.should redirect_to(place_path(@place))
+      end
+
+      it "should show a success message" do
+        put_update
+        flash[:success].should_not be_nil
+      end
+    end
+
+    describe "when unsuccessful" do
+      before do
+        @place.should_receive(:save).and_return(false)
+      end
+
+      it "should rerender the show page with the place" do
+        put_update
+        assigns[:place].should === @place
+        response.should render_template(:new)
+      end
+    end
+
+    def put_update
+      put :update, @params
     end
   end
 end

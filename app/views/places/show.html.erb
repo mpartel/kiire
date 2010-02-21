@@ -1,0 +1,12 @@
+<h1><%= h @place.name %></h1>
+
+<% form_for @place do |f| %>
+  <div>
+    <%= f.label :name, t("places.name") %>
+    <%= f.text_field :name %>
+
+    <%= f.submit t("places.save") %>
+  </div>
+<% end %>
+
+<%= link_to t("places.back"), settings_path %>

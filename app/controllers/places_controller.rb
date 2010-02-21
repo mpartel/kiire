@@ -17,4 +17,19 @@ class PlacesController < ApplicationController
     end
     redirect_to settings_path
   end
+
+  def show
+    @place = current_user.places.find(params[:id])
+  end
+
+  def update
+    @place = current_user.places.find(params[:id])
+    @place.update_attributes(params[:place])
+    if @place.save
+      flash[:success] = t("places.place_updated")
+      redirect_to place_path(@place)
+    else
+      render :new
+    end
+  end
 end

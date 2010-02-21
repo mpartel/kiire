@@ -32,3 +32,16 @@ Feature: Managing places
     But I should see "Work"
 
   #TODO: reordering
+
+  Scenario: Renaming a place
+    Given I have logged in
+    And I have saved a place "Work"
+    And I am on the settings page
+    When I follow "edit" within "td.edit"
+    And I fill in "Zork" for "Name"
+    And I press "Save"
+    And I follow "Back"
+    Then I should be on the settings page
+    And I should see "Zork"
+    But I should not see "Work"
+
