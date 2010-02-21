@@ -11,6 +11,11 @@ describe Place do
     @place.user.should be_a(User)
   end
 
+  it "should have place settings" do
+    @place.settings.should be_a(Enumerable)
+    @place.settings.new.should be_a(PlaceSetting)
+  end
+
   describe "validation" do
     it "should be valid when constructed by the factory" do
       @place.should be_valid
