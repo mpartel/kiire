@@ -1,14 +1,24 @@
 var places = {};
 
-function Place(id, name) {
+function Place(attribs) {
   var self = this;
 
-  this.id = id;
-  this.name = name;
+  this.id = attribs['id'];
+  this.name = attribs['name'];
+  this.settings = attribs['settings']
 
-  places[id] = this;
+  places[this.id] = this;
 
-  this.element = $('#place-' + id)[0];
+  this.getAddressForBackend = function(backend) {
+    backend = self.settings[backend];
+    if (backend && backend['address_for']) {
+      return backend['address_for'];
+    } else {
+      return self.name;
+    }
+  }
+
+  this.element = $('#place-' + this.id)[0];
 
   $(this.element).click(function() {
     UI.selectPlace(self);
@@ -108,7 +118,7 @@ $(document).ready(function() {
 
 
     this.selectPlace = function(place) {
-      this.focusedField.setValue(place.name);
+      this.focusedField.setValue(place.getAddressForBackend('reittiopas'));
       this.focusedField.theOtherField.focus();
     }
 

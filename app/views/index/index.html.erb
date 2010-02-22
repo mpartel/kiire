@@ -20,7 +20,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     <% @places.each do |place| %>
-      new Place(<%= place.id %>, <%= place.name.to_json %>);
+      new Place(<%= place.client_attributes.to_json %>);
     <% end %>
   });
 </script>

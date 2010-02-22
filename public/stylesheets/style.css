@@ -76,15 +76,22 @@ div.fieldWithErrors label {
 
 ul#places {
   display: block;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 li.place {
   display: inline-block;
   border: 1px solid black;
   padding: 10px;
+  margin-left: 1em;
   cursor: pointer;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+}
+
+div#destinations {
+  margin-left: 1em;
 }
 
 div.place-field-container {
@@ -92,7 +99,9 @@ div.place-field-container {
 }
 
 input.place {
-  background-color: #EEEEEE;
+  border: 3px inset gray;
+  background-color: #FFFFFF;
+  width: 25%;
 }
 
 input.place:focus {

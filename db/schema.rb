@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100221234646) do
+ActiveRecord::Schema.define(:version => 20100222003708) do
 
   create_table "place_settings", :force => true do |t|
     t.integer  "place_id",   :null => false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20100221234646) do
     t.datetime "updated_at"
   end
 
-  add_index "place_settings", ["key", "backend"], :name => "index_place_settings_on_key_and_backend", :unique => true
+  add_index "place_settings", ["place_id", "key", "backend"], :name => "index_place_settings_on_place_id_and_key_and_backend", :unique => true
 
   create_table "places", :force => true do |t|
     t.integer  "user_id",    :null => false
