@@ -94,12 +94,8 @@ li.place {
   -webkit-border-radius: 5px;
 }
 
-div#destinations {
+div#place-fields {
   margin-left: 1em;
-}
-
-div.place-field-container {
-  display: inline;
 }
 
 input.place {
@@ -108,7 +104,7 @@ input.place {
   width: 25%;
 }
 
-input.place:focus {
+input.place.focused-place-field {
   background-color: #AADDFF;
 }
 

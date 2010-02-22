@@ -5,12 +5,14 @@ en:
     log_out: Log out
 
   index:
-    log_in: Log in
+    from: Mistä
+    to: Mihin
     go_now: GO
 
   session:
     username: Username
     password: Password
+    log_in: Log in
     failed_to_log_in: Failed to log in
     register: Register
 

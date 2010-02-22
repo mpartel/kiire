@@ -5,12 +5,14 @@ fi:
     log_out: Kirjaudu ulos
 
   index:
-    log_in: Kirjaudu
+    from: Mistä
+    to: Mihin
     go_now: Opasta
 
   session:
     username: Tunnus
     password: Salasana
+    log_in: Kirjaudu
     failed_to_log_in: Kirjautuminen epäonnistui
     register: Rekisteröidy
 

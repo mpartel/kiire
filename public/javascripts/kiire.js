@@ -65,27 +65,32 @@ $(document).ready(function() {
     this.from.theOtherField = this.to;
     this.to.theOtherField = this.from;
 
-    this.programFocus = function() {
-      this.focuseableElements = [
-        this.from.element,
-        this.to.element,
-        this.goButton
-      ];
+    this.fieldByElement = function(element) {
+      if (element == self.from.element) {
+        return self.from;
+      } else if (element == self.to.element) {
+        return self.to;
+      } else {
+        return null;
+      }
+    }
 
-      $(this.from.element).focus(function() {
-        self.focusedField = self.from;
-      });
-      $(this.to.element).focus(function() {
-        self.focusedField = self.to;
+    this.programFocus = function() {
+      function switchPlaceFieldFocus(field) {
+        $(field.theOtherField.element).removeClass('focused-place-field');
+        self.targetField = field;
+        $(field.element).addClass('focused-place-field');
+        return true;
+      }
+
+      $('*').live('focus', function() {
+        var field = self.fieldByElement(this);
+        if (field) {
+          switchPlaceFieldFocus(field);
+        }
       });
 
       this.from.focus();
-
-      $('*').live('focus', function() {
-        if ($.inArray(this, self.focuseableElements) > -1) {
-          self.focusedField.focus();
-        }
-      });
     }
 
     this.programEnter = function() {
@@ -118,8 +123,8 @@ $(document).ready(function() {
 
 
     this.selectPlace = function(place) {
-      this.focusedField.setValue(place.getAddressForBackend('reittiopas'));
-      this.focusedField.theOtherField.focus();
+      this.targetField.setValue(place.getAddressForBackend('reittiopas'));
+      this.targetField.theOtherField.focus();
     }
 
     this.goNow = function() {
