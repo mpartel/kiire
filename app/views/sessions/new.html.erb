@@ -2,10 +2,10 @@
 
 <% form_for :user, :url => session_path do |f| %>
   <div id="login-form">
-    <%= f.label :username %>
+    <%= f.label :username, t("session.username") %>
     <%= f.text_field :username %>
 
-    <%= f.label :password %>
+    <%= f.label :password, t("session.password") %>
     <%= f.password_field :password %>
 
     <%= f.submit t("index.log_in") %>

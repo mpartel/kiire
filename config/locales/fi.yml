@@ -1,0 +1,57 @@
+fi:
+  application:
+    start_page: Alkuun
+    settings: Asetukset
+    log_out: Kirjaudu ulos
+
+  index:
+    log_in: Kirjaudu
+    go_now: Opasta
+
+  session:
+    username: Tunnus
+    password: Salasana
+    failed_to_log_in: Kirjautuminen epäonnistui
+    register: Rekisteröidy
+
+  user:
+    invalid_characters_in_username: koostuttava merkeistä 0-9, a-z, A-Z, -, _
+    password_may_not_be_empty: ei saa olla tyhjä
+    password_confirmation_does_not_match: ei täsmää
+    registration: Rekisteröinti
+    username: Käyttäjätunnus
+    email: Sähköposti
+    email_description: (valinnainen, ei roskapostia)
+    password: Salasana
+    password_confirmation: Salasanan varmistus
+    create_account: Luo tunnus
+    account_created: Tunnukset luotu.
+
+  settings:
+    title: Asetukset
+    back: Takaisin
+    places:
+      title: Omat paikat
+      edit: muuta
+      delete: poista
+      confirm_delete: Poistetaanko {{place}} oikeasti?
+    new_place:
+      title: Uusi paikka
+      name: Nimi
+      add_place: Lisää paikka
+    options:
+      title: Asetukset
+
+  places:
+    new_place_added: Uusi paikka lisätty
+    failed_to_add_new_place: Uuden paikan lisääminen epäonnistui
+    place_deleted: Paikka poistettu
+    address_for:
+      reittiopas: Reittioppaalle lähetettävä osoite
+    place_updated: Paikka päivitetty
+    name: Nimi
+    save: Tallenna
+    back: Takaisin
+
+  place_settings:
+    invalid_backend: Tuntematon taustapalvelu

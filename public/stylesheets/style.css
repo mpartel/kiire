@@ -46,6 +46,10 @@ form button {
   margin-bottom: 0.6em;
 }
 
+form.edit_place input[type=text] {
+  width: 26em;
+}
+
 input[type=button],
 input[type=submit],
 button {
