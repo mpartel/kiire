@@ -1,17 +1,22 @@
 <%= javascript_include_tag 'kiire.js' %>
 
-<div id="place-fields">
-  <div class="place-field-container" id="from-container">
-    <label for="from"><%= t("index.from") %></label>
-    <input class="place" type="text" id="from" name="from" />
-  </div>
-  <div class="place-field-container" id="to-container">
-    <label for="to"><%= t("index.to") %></label>
-    <input class="place" type="text" id="to" name="from" />
-  </div>
-
-  <button id="go"><%= t("index.go_now") %></button>
-</div>
+<table id="place-fields">
+  <tr>
+    <td>
+      <div class="place-field-container" id="from-container">
+        <label for="from"><%= t("index.from") %></label>
+        <input class="place" type="text" id="from" name="from" />
+      </div>
+      <div class="place-field-container" id="to-container">
+        <label for="to"><%= t("index.to") %></label>
+        <input class="place" type="text" id="to" name="from" />
+      </div>
+    </td>
+    <td>
+      <button id="go"><%= t("index.go_now") %></button>
+    </td>
+  </tr>
+</table>
 
 <ul id="places">
   <% @places.each do |place| %>

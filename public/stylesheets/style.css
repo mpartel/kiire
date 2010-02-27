@@ -86,7 +86,7 @@ ul#places {
 
 li.place {
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid gray;
   padding: 10px;
   margin-left: 1em;
   cursor: pointer;
@@ -94,14 +94,14 @@ li.place {
   -webkit-border-radius: 5px;
 }
 
-div#place-fields {
+#place-fields {
   margin-left: 1em;
 }
 
 input.place {
-  border: 3px inset gray;
+  border: 1px solid gray;
   background-color: #FFFFFF;
-  width: 25%;
+  width: 250px;
 }
 
 input.place.focused-place-field {
@@ -110,6 +110,11 @@ input.place.focused-place-field {
 
 table#places-manager td:first-child {
   padding-right: 2.6em;
+}
+
+button#go {
+  width: 200px;
+  height: 40px;
 }
 
 a.delete {
