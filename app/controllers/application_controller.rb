@@ -26,14 +26,6 @@ protected
     User.find_by_id(session[:current_user_id])
   end
 
-  def addressed_user
-    if current_user
-      current_user
-    elsif params[:username]
-      User.find_by_username(params[:username])
-    end
-  end
-
   def logged_in?
     !!current_user
   end

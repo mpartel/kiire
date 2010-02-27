@@ -16,38 +16,6 @@ describe ApplicationController do
       end
     end
 
-    describe "#addressed_user" do
-      describe "when there is a current user" do
-        before do
-          @user = mock_model(User)
-          controller.stub!(:current_user).and_return(@user)
-        end
-
-        it "should return the current user" do
-          controller.send(:addressed_user).should == @user
-        end
-      end
-
-      describe "when there is no current user" do
-        before do
-          controller.stub!(:current_user).and_return(nil)
-        end
-
-        describe "when there is a username parameter" do
-          before do
-            controller.params[:username] = 'foo'
-          end
-
-          it "should return the user by that username" do
-            @user = mock_model(User)
-            User.should_receive(:find_by_username).with('foo').and_return(@user)
-
-            controller.send(:addressed_user).should == @user
-          end
-        end
-      end
-    end
-
     describe "when there is no current user id in the session" do
       it "should return nil" do
         controller.send(:current_user).should be_nil
