@@ -24,7 +24,7 @@ fi:
     registration: Rekisteröinti
     username: Käyttäjätunnus
     email: Sähköposti
-    email_description: (valinnainen, ei roskapostia)
+    email_description: (ei pakollinen)
     password: Salasana
     password_confirmation: Salasanan varmistus
     create_account: Luo tunnus

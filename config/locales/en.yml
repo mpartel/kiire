@@ -24,7 +24,7 @@ en:
     registration: Registration
     username: Username
     email: E-mail
-    email_description: (optional, no spam)
+    email_description: (optional)
     password: Password
     password_confirmation: Password confirmation
     create_account: Create account
