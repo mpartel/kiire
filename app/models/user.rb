@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def get_setting(key)
+    key = key.to_s
     settings.find_by_key(key) || settings.build(:key => key, :value => Setting.default_value(key))
   end
 

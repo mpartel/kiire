@@ -3,6 +3,7 @@ en:
     start_page: Main
     settings: Settings
     log_out: Log out
+    log_in: Log in
 
   index:
     from: From

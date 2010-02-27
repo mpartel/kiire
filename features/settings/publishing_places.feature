@@ -8,8 +8,7 @@ Feature: Publishing places
     When I go to the page showing the places of "kalle"
     Then I should be on the login page
 
-  #TODO: Next
-  Scenario Outline: setting the main page the be accessible without logging in
+  Scenario: setting the main page the be accessible without logging in
     Given I have logged in as "kalle"
     When I go to the settings page
     And I check "Don't require login"
@@ -17,3 +16,4 @@ Feature: Publishing places
     And I follow "Log out"
     And I go to the page showing the places of "kalle"
     Then I should be on the page showing the places of "kalle"
+    And I should see "Log in"

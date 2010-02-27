@@ -57,4 +57,11 @@ describe UsersController do
       post :create, @params
     end
   end
+
+  describe "#check_authorization" do
+    it "should require login" do
+      controller.should_not_receive(:must_be_logged_in)
+      controller.send(:check_authorization)
+    end
+  end
 end

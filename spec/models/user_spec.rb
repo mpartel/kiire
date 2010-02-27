@@ -160,7 +160,7 @@ describe User do
     describe "when the setting exists" do
       it "should return the setting" do
         setting = Factory.create(:setting, :user => @user, :key => 'foo')
-        @user.get_setting('foo').should == setting
+        @user.get_setting(:foo).should == setting
       end
     end
   end

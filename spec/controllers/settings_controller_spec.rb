@@ -24,27 +24,39 @@ describe SettingsController do
 
   describe "#update" do
     before do
-      @params = {
-        'settings' => {
-          'some_option' => 'some_setting'
+      @dont_require_login = mock_model(Setting)
+      controller.stub_chain(:current_user, :get_setting).with('dont_require_login').and_return(@dont_require_login)
+    end
+
+    describe "given new settings" do
+      before do
+        @params = {
+          'settings' => {
+            'dont_require_login' => '1'
+          }
         }
-      }
 
-      @setting = mock_model(Setting)
-      controller.stub_chain(:current_user, :get_setting).with('some_option').and_return(@setting)
+        @dont_require_login.should_receive(:value=).with('1')
+        @dont_require_login.stub!(:save!)
+      end
 
-      @setting.should_receive(:value=).with('some_setting')
-      @setting.stub!(:save!)
+      it "should save dont_require_login" do
+        @dont_require_login.should_receive(:save!)
+        put_update
+      end
+
+      it "should redirect to the show settings page" do
+        put_update
+        response.should redirect_to(settings_path)
+      end
     end
 
-    it "should save settings" do
-      @setting.should_receive(:save!)
-      put_update
-    end
-
-    it "should redirect to the show settings page" do
-      put_update
-      response.should redirect_to(settings_path)
+    describe "given no parameters" do # (all parameters nil)
+      it "should unset dont_require_login" do
+        @dont_require_login.should_receive(:value=).with(nil)
+        @dont_require_login.should_receive(:save!)
+        put_update
+      end
     end
 
     def put_update

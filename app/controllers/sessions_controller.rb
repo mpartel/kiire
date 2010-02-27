@@ -19,4 +19,7 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+protected
+  def check_authorization
+  end
 end

@@ -13,4 +13,7 @@ class UsersController < ApplicationController
     end
   end
 
+protected
+  def check_authorization
+  end
 end

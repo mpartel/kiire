@@ -3,6 +3,7 @@ fi:
     start_page: Alkuun
     settings: Asetukset
     log_out: Kirjaudu ulos
+    log_in: Kirjautumiseen
 
   index:
     from: Mistä

@@ -6,11 +6,14 @@ class SettingsController < ApplicationController
 
   def update
     user = current_user
-    params[:settings].each do |key, value|
+    
+    settings_to_save = ['dont_require_login']
+    settings_to_save.each do |key|
       setting = user.get_setting(key)
-      setting.value = value
+      setting.value = if params[:settings] then params[:settings][key] else nil end
       setting.save!
     end
+
     redirect_to settings_path
   end
 

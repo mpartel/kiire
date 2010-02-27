@@ -1,3 +1,4 @@
+---
+dont_require_login:
 reittiopas:
   nroutes: 3
-  dont_require_login: 0

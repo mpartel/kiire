@@ -8,9 +8,30 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password, :password_confirm
 
+  before_filter :check_authorization
+
 protected
+
+  def check_authorization
+    must_be_logged_in
+  end
+
+  def must_be_logged_in
+    unless current_user
+      redirect_to new_session_path
+    end
+  end
+
   def current_user
     User.find_by_id(session[:current_user_id])
+  end
+
+  def addressed_user
+    if current_user
+      current_user
+    elsif params[:username]
+      User.find_by_username(params[:username])
+    end
   end
 
   def logged_in?

@@ -16,6 +16,8 @@
       <span><%= link_to t("application.start_page"), root_path  %></span>
       <span><%= link_to t("application.settings"), settings_path, :id => "settings-link" %></span>
       <span><%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout-link' %></span>
+    <% elsif !controller.is_a?(SessionsController) %>
+      <span><%= link_to t("application.log_in"), new_session_path, :id => 'login-link' %></span>
     <% end %>
   </div>
 

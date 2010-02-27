@@ -78,4 +78,11 @@ describe SessionsController do
       response.should redirect_to(root_path)
     end
   end
+
+  describe "#check_authorization" do
+    it "should not require login" do
+      controller.should_not_receive(:must_be_logged_in)
+      controller.send(:check_authorization)
+    end
+  end
 end
