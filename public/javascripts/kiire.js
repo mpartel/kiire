@@ -47,6 +47,7 @@ $(document).ready(function() {
 
     this.focus = function() {
       self.element.focus();
+      self.element.select();
     }
 
     this.isEmpty = function() {
