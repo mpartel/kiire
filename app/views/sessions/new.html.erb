@@ -22,6 +22,17 @@
     } else if (password_field) {
       password_field.focus();
     }
+  
+    $('#user_submit').click(function() {
+      if (password_field.value == '') {
+        var loc = window.location;
+        var url = loc.protocol + '//' + loc.host + '/' + username_field.value;
+        loc.href = url;
+        return false;
+      } else {
+        return true;
+      }
+    });
   });
 </script>
 
