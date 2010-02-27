@@ -5,8 +5,8 @@ en:
     log_out: Log out
 
   index:
-    from: Mistä
-    to: Mihin
+    from: From
+    to: To
     go_now: GO
 
   session:
@@ -43,6 +43,8 @@ en:
       add_place: Add place
     options:
       title: Options
+      dont_require_login: Don't require login
+      save: Save
 
   places:
     new_place_added: New place added

@@ -15,4 +15,4 @@ Feature: registration
     And I fill in "Password confirmation" with "sussi"
     And I press "Create account"
     Then I should be on the login page
-    And there exists a user "jussi"
+    And a user "jussi" has been created

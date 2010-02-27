@@ -20,25 +20,12 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(plaintext.to_s)
   end
 
-  def settings_hash
-    result = Hash.new do |hash, key|
-      Setting.default_value(key)
-    end
-    settings.each do |setting|
-      result[setting.key] = setting.value
-    end
-    return result
-  end
-
-  def settings_hash=(hash)
-    new_settings = []
-    hash.each do |k, v|
-      new_settings << Setting.new(:user => self, :key => k, :value => v)
-    end
-    self.settings = new_settings
+  def get_setting(key)
+    settings.find_by_key(key) || settings.build(:key => key, :value => Setting.default_value(key))
   end
 
 private
+
   def username_must_be_alphanumeric_with_dashes_and_underscores
     unless username.to_s =~ /^[a-zA-Z0-9_-]*$/
       errors.add(:username, I18n.t("user.invalid_characters_in_username"))
@@ -60,6 +47,17 @@ private
   def attempt_password_reset
     if password and password == password_confirmation
       self.password_hash = User.hash_password(password)
+    end
+  end
+
+  def save_settings_hash
+    settings_hash.each do |k, v|
+      existing = settings.find_by_key(k)
+      if existing
+        existing.value = v
+      else
+        settings.build(:user => self, :key => k, :value => v)
+      end
     end
   end
 end

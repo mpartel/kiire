@@ -35,12 +35,16 @@
 <% end %>
 </div>
 
-<!--
 <h2><%= t("settings.options.title") %></h2>
-<div>
-  TODO
-</div>
--->
+<% form_tag settings_path, :method => :put do %>
+  <div>
+    <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login") %>
+    <%= check_box_tag "settings[dont_require_login]", '1', current_user.get_setting(:dont_require_login).value %>
+
+    <%= submit_tag t("settings.options.save") %>
+  </div>
+<% end %>
+
 
 <div class="back">
   <%= link_to t("settings.back"), root_path, :class => "back" %>

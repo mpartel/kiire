@@ -23,6 +23,9 @@ module NavigationHelpers
     when /the edit page of the place "([^"]*)"/
       edit_place_path(Place.find_by_name!($1))
 
+    when /the page showing the places of "([^"]*)"/
+      user_places_path(:username => $1)
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

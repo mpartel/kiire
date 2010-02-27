@@ -1,4 +1,8 @@
 
-Then /^there exists a user "([^\"]*)"$/ do |arg1|
-  
+Given /^there exists a user "([^\"]*)"$/ do |username|
+  Factory.create(:user, :username => username)
+end
+
+Then /^a user "([^\"]*)" has been created$/ do |username|
+  User.find_by_username(username).should_not be_nil
 end

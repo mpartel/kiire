@@ -43,6 +43,8 @@ fi:
       add_place: Lisää paikka
     options:
       title: Asetukset
+      dont_require_login: Älä vaadi kirjautumista
+      save: Tallenna
 
   places:
     new_place_added: Uusi paikka lisätty

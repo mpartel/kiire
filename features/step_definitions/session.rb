@@ -2,8 +2,10 @@ Given /^I have no active session$/ do
   cookies.clear
 end
 
-Given /^I have logged in$/ do
+Given /^I have logged in(?: as "([^"]*)")?$/ do |username|
+
   @my_user ||= Factory.create(:user)
+  @my_user.username = username if username
   @my_user.password = 'furniture'
   @my_user.password_confirmation = 'furniture'
   @my_user.save

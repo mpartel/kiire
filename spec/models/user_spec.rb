@@ -138,13 +138,6 @@ describe User do
     @user.settings.should be_a(Enumerable)
   end
 
-  it "should destroy its settings when destroyed" do
-    setting = Factory.create(:setting, :user => @user)
-    @user.settings.should include(setting)
-    @user.destroy
-    Setting.exists?(setting.id).should be_false
-  end
-
   it "should save its settings when saved" do
     setting = Factory.build(:setting, :user => @user)
     @user.settings << setting
@@ -153,43 +146,22 @@ describe User do
     setting.should_not be_new_record
   end
 
-  describe "#settings_hash" do
-    before do
-      Setting.stub!(:default_value)
+  describe "#get_setting" do
+    describe "when the setting doesn't exists" do
+      it "should return a new setting with a default value" do
+        Setting.should_receive(:default_value).with('foo').and_return('bar')
+        result = @user.get_setting('foo')
+        result.should be_new_record
+        result.key.should == 'foo'
+        result.value.should == 'bar'
+      end
     end
 
-    it "should return all settings as a hash" do
-      s1 = mock_model(Setting, :key => 'foo', :value => 'FOO')
-      s2 = mock_model(Setting, :key => 'bar.baz', :value => 'BAR')
-      @user.settings << s1
-      @user.settings << s2
-      @user.settings_hash.should == {'foo' => 'FOO', 'bar.baz' => 'BAR'}
-    end
-
-    it "should return a hash that uses default values for missing settings" do
-      Setting.should_receive(:default_value).with('foo.bar').and_return('baz')
-      @user.settings_hash['foo.bar'].should == 'baz'
-    end
-  end
-
-  describe "#settings_hash=" do
-    it "should set all settings from a hash" do
-      given_hash = {
-        'foo' => 'FOO',
-        'bar' => 'BAR'
-      }
-
-      expected_settings = [
-        mock_model(Setting),
-        mock_model(Setting)
-      ]
-
-      Setting.should_receive(:new).with(:user => @user, :key => 'foo', :value => 'FOO').and_return(expected_settings[0])
-      Setting.should_receive(:new).with(:user => @user, :key => 'bar', :value => 'BAR').and_return(expected_settings[1])
-
-      @user.should_receive(:settings=).with(expected_settings)
-
-      @user.settings_hash = given_hash
+    describe "when the setting exists" do
+      it "should return the setting" do
+        setting = Factory.create(:setting, :user => @user, :key => 'foo')
+        @user.get_setting('foo').should == setting
+      end
     end
   end
 
@@ -198,11 +170,24 @@ describe User do
     @user.places.should be_a(Enumerable)
   end
 
-  it "should destroy its places when destroyed" do
-    place = Factory.create(:place, :user => @user)
-    @user.places.should include(place)
-    @user.destroy
-    Setting.exists?(place.id).should be_false
+  describe "when destroyed" do
+    before do
+      @user.save!
+    end
+
+    it "should destroy its settings" do
+      setting = Factory.create(:setting, :user => @user)
+      @user.settings.should include(setting)
+      @user.destroy
+      Setting.exists?(setting.id).should be_false
+    end
+
+    it "should destroy its places" do
+      place = Factory.create(:place, :user => @user)
+      @user.places.should include(place)
+      @user.destroy
+      Place.exists?(place.id).should be_false
+    end
   end
 
 end
