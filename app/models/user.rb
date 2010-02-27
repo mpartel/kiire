@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def self.hash_password(plaintext)
+    require 'rubygems'
+    require 'digest'
     Digest::SHA1.hexdigest(plaintext.to_s)
   end
 
