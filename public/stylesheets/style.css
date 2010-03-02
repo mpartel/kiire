@@ -68,6 +68,10 @@ div#login-links {
   margin-top: 1.6em;
 }
 
+div#info-links {
+  float: right;
+}
+
 div.back {
   margin: 0.8em;
 }

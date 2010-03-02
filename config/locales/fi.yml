@@ -16,6 +16,7 @@ fi:
     log_in: Kirjaudu
     failed_to_log_in: Kirjautuminen epäonnistui
     register: Rekisteröidy
+    about_the_site: Tietoa sivustosta
 
   user:
     invalid_characters_in_username: koostuttava merkeistä 0-9, a-z, A-Z, -, _

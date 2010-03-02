@@ -26,6 +26,9 @@ module NavigationHelpers
     when /the page showing the places of "([^"]*)"/
       user_places_path(:username => $1)
 
+    when /the information page/
+      info_path
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

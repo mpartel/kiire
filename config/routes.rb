@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :settings
   map.resources :places
+  map.resource :info
 
   map.user_places ':username', :controller => 'index', :action => 'index'
 end
