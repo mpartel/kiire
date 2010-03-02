@@ -1,7 +1,78 @@
+<h2>Mikäs sivu tämä oikein on?</h2>
 <p>
-  kiire.fi on kirjanmerkkisivu
+  kiire.fi on ilmainen kirjanmerkkisivu
   <a href="http://www.reittiopas.fi">Reittiopas</a>-palvelulle.
+  <!-- TODO: demolinkki -->
+</p>
+
+<h2>Kenelle tämä on tarkoitettu?</h2>
+<p>
+  Sivu on optimoitu niille, joilla on joukko vakiopaikkoja,
+  joiden välillä liikutaan usein. Reitin kahden paikan välillä
+  voi hakea kolmella klikkauksella, mikä on paljon
+  osoitteiden muistelemista ja naputtelemista kätevämpää, varsinkin kännykällä.
 </p>
 <p>
-  (Tähän tulee melko pian lyhyt käyttöohje).
+  Omiin paikkoihin pääsee käsiksi nopeasti mistä tahansa
+  käyttäjäkohtaisen osoitteen <tt>tunnus.kiire.fi</tt> kautta.
+</p>
+
+<h2>Eikös reittioppaas jo osaa muistaa paikkoja?</h2>
+<p>
+  kiire.fi tallentaa käyttäjien paikat palvelimelle evästeiden sijaan.
+  Näin paikat ovat aina käytettävissä ja ajan tasalla missä vain,
+  eivätkä ne katoa vahingossa, kuten evästeiden kanssa voi usein käydä.
+</p>
+<p>
+  Reittioppaassa on myös hieman keskeneräiseltä vaikuttava
+  "omat lähdöt"-palvelu, mutta se on tarkoitettu pysäkkien
+  aikataulujen seuraamiseen eikä se toteuta samoja käyttötapauksia
+  kuin kiire.fi.
+</p>
+<p>
+  kiire.fi pidetään mahdollisimman kevyenä ja yksinkertaisena,
+  jotta sivu latautuisi aina nopeasti ja sitä olisi mukava
+  käyttää myös mobiililaitteilla.
+</p>
+
+<h2>Tietoturvasta</h2>
+<p>
+  Palvelu olisi paljon vähemmän hyödyllinen,
+  jos siihen täytyisi aina kirjautua ennen käyttöä.
+  Käyttäjälle tarjotaan tämän vuoksi erilaisia vaihtoehtoja
+  kätevyys&mdash;tietoturva-asteikolla:
+</p>
+<ol>
+  <li>Pääsy ilman salasanaa. Salasanaa vaaditaan vain asetusten muuttamiseen.</li>
+  <li>Kirjautumisen muistaminen selaimen evästeessä, vaikka selain suljetaan. [tulossa, luultavasti oletusarvoksi]</li>
+  <li>Perinteinen tapa: kirjautuminen voimassa selaimen sulkemiseen asti.</li>
+</ol>
+
+<h2>Tulevia parannuksia</h2>
+<p>
+  Seuraavat parannukset ovat käyneet mielessä.
+  Osa niistä toteutunee melko pian.
+</p>
+<ul>
+  <li>Demotunnukset</li>
+  <li>Käyttäjätunnuksen ja/tai kirjautumisen muistaminen evästeellä</li>
+  <li>Paikkojen uudelleenjärjestäminen</li>
+  <li>Sivulatauksien nopeuttaminen entisestään (välimuistitus, mod_passenger, ...)</li>
+  <li>Monikielisyys</li>
+  <li>Ulkoasun parantelua, kunhan sitä ei tehdä nopeuden kustannuksella</li>
+</ul>
+
+<h2>Kuka tämän teki ja miksi?</h2>
+<p>
+  Olen Martin Pärtel, tietojenkäsittelytieteen opiskelija,
+  ja tein tämän huvin ja harjoituksen vuoksi omaa ja kavereiden käyttöä varten.
+  Otan mieluusti vastaan kommentteja, parannusehdotuksia yms,
+  joita voi lähettää osoitteeseen <tt>admin ät kiire.fi</tt>
+</p>
+
+<h2>Teknistä</h2>
+<p>
+  Palvelu on toteutettu Ruby on Railsilla ja SQLite-tietokannalla,
+  ja se sijaitsee
+  <a href="http://www.nodeta.fi/hosting">Nodetan webhotellissa</a>.
 </p>
