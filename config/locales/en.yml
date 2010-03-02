@@ -16,7 +16,7 @@ en:
     log_in: Log in
     failed_to_log_in: Failed to log in
     register: Register
-    about_the_site: About the site
+    about_the_site: About
 
   user:
     invalid_characters_in_username: must consist of the characters 0-9, a-z, A-Z, -, _
