@@ -4,5 +4,5 @@ Feature: info pages
   I want to read a description
   Scenario: accessing info pages from the login page
     Given I am on the login page
-    When I follow "About the site"
+    When I follow "About"
     Then I should be on the information page
