@@ -61,3 +61,17 @@ fi:
 
   place_settings:
     invalid_backend: Tuntematon taustapalvelu
+
+  activerecord:
+    attributes:
+      models:
+        user: Käyttäjä
+        setting: Asetus
+        place: Paikka
+      user:
+        username: Käyttäjänimi
+        password: Salasana
+        password_confirmation: Salasanan varmistus
+        email: Sähköpostiosoite
+      place:
+        name: Nimi
