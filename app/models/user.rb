@@ -52,15 +52,4 @@ private
       self.password_hash = User.hash_password(password)
     end
   end
-
-  def save_settings_hash
-    settings_hash.each do |k, v|
-      existing = settings.find_by_key(k)
-      if existing
-        existing.value = v
-      else
-        settings.build(:user => self, :key => k, :value => v)
-      end
-    end
-  end
 end
