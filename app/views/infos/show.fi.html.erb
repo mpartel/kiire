@@ -2,7 +2,7 @@
 <p>
   kiire.fi on ilmainen kirjanmerkkisivu
   <a href="http://www.reittiopas.fi">Reittiopas</a>-palvelulle.
-  <!-- TODO: demolinkki -->
+  Kokeile <%= link_to "demoa", user_places_path(:username => 'demo') %>.
 </p>
 
 <h2>Kenelle tämä on tarkoitettu?</h2>
@@ -54,7 +54,7 @@
   Osa niistä toteutunee melko pian.
 </p>
 <ul>
-  <li>Demotunnukset</li>
+  <li><span class="strike">Demotunnukset</span></li>
   <li>Käyttäjätunnuksen ja/tai kirjautumisen muistaminen evästeellä</li>
   <li>Paikkojen uudelleenjärjestäminen</li>
   <li>Sivulatauksien nopeuttaminen entisestään (välimuistitus, mod_passenger, ...)</li>

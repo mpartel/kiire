@@ -3,6 +3,10 @@ demouser = User.create!(:username => 'demo',
                         :password => nil,
                         :password_confirmation => nil)
 
+setting = demouser.get_setting('dont_require_login')
+setting.value = '1'
+setting.save!
+
 rautatientori = demouser.places.create!(:name => 'Rautatieasema')
 koulu = demouser.places.create!(:name => 'Koulu')
 koti = demouser.places.create!(:name => 'Koti')

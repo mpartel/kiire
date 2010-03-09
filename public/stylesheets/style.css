@@ -29,6 +29,10 @@ a:visited {
   color: green;
 }
 
+.strike {
+  text-decoration: line-through;
+}
+
 table td {
   padding-right: 1em;
 }
