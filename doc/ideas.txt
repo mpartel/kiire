@@ -1,0 +1,3 @@
+- Muista käsin syötetyt bookmark-ehdotuksina.
+- kirjautumaton -> astukset -> salasankenttä-fokus
+- uusi paikka: osoite, (nimi, optional)
