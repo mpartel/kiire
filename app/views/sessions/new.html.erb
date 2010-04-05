@@ -17,9 +17,9 @@
   $(document).ready(function() {
     username_field = $('#user_username')[0];
     password_field = $('#user_password')[0];
-    if (username_field) {
+    if (username_field.value == '') {
       username_field.focus();
-    } else if (password_field) {
+    } else {
       password_field.focus();
     }
   
