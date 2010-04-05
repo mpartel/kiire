@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       end
     else
       flash[:error] = t("session.failed_to_log_in")
-      redirect_to root_path
+      redirect_to new_session_path
     end
   end
 

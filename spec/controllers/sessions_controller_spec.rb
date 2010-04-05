@@ -77,9 +77,9 @@ describe SessionsController do
           flash[:error].should_not be_nil
         end
 
-        it "should redirect to index" do
+        it "should redirect to the login page" do
           post_create
-          response.should redirect_to(root_path)
+          response.should redirect_to(new_session_path)
         end
       end
     end

@@ -22,23 +22,12 @@
     } else {
       password_field.focus();
     }
-  
-    $('#user_submit').click(function() {
-      if (password_field.value == '') {
-        var loc = window.location;
-        var url = loc.protocol + '//' + loc.host + '/' + username_field.value;
-        loc.href = url;
-        return false;
-      } else {
-        return true;
-      }
-    });
   });
 </script>
 
 <div id="login-links">
   <% unless logged_in? %>
-    <%= link_to t("session.register"), new_user_path, :id => 'register' %>
+    <%= link_to t("session.register"), with_regular_hostname(new_user_path), :id => 'register' %>
   <% end%>
 </div>
 
