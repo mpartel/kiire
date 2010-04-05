@@ -76,4 +76,29 @@ describe ApplicationController do
       controller.send(:username_from_hostname).should be_nil
     end
   end
+
+  describe "hostname_without_username" do
+    describe "when the hostname has less than three parts" do
+      it "should return the current hostname" do
+        request.host = 'example.com'
+        controller.send(:hostname_without_username).should == 'example.com'
+      end
+    end
+
+    describe "when the hostname has at least three parts" do
+      it "should return the hostname without the first parts" do
+        request.host = 'foo.example.com'
+        controller.send(:hostname_without_username).should == 'example.com'
+        request.host = 'foo.zoo.example.com'
+        controller.send(:hostname_without_username).should == 'example.com'
+      end
+
+      it "should return the hostname with the first part if it is reserved" do
+        request.host = 'www.example.com'
+        controller.send(:hostname_without_username).should == 'www.example.com'
+        request.host = 'www.funny.example.com'
+        controller.send(:hostname_without_username).should == 'www.funny.example.com'
+      end
+    end
+  end
 end

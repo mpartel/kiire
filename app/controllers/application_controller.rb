@@ -31,14 +31,25 @@ protected
   end
 
   def username_from_hostname
-    reserved_prefixes = ['www', 'ftp', 'img']
-
     parts = request.host.split('.')
     if parts.length > 2
-      username = parts[0]
-      return username unless reserved_prefixes.include? username
+      username = parts.first
+      return username unless reserved_hostname_prefixes.include? username
     end
 
     return nil
+  end
+
+  def hostname_without_username
+    parts = request.host.split('.')
+    if parts.length > 2 and !reserved_hostname_prefixes.include?(parts.first)
+      parts.reverse.take(2).reverse.join '.'
+    else
+      request.host
+    end
+  end
+
+  def reserved_hostname_prefixes
+    ['www', 'ftp', 'img']
   end
 end
