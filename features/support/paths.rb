@@ -29,6 +29,9 @@ module NavigationHelpers
     when /the information page/
       info_path
 
+    when /the host "([^"]*)"/
+      'http://' + $1 + '/'
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"
