@@ -29,4 +29,16 @@ protected
   def logged_in?
     !!current_user
   end
+
+  def username_from_hostname
+    reserved_prefixes = ['www', 'ftp', 'img']
+
+    parts = request.host.split('.')
+    if parts.length > 2
+      username = parts[0]
+      return username unless reserved_prefixes.include? username
+    end
+
+    return nil
+  end
 end

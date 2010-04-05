@@ -19,13 +19,8 @@ protected
   end
 
   def apply_hostname
-    reserved_prefixes = ['www', 'ftp', 'img']
-
-    parts = request.host.split('.')
-    if parts.length > 2
-      username = parts[0]
-      params[:username] = username unless reserved_prefixes.include? username
-    end
+    username = username_from_hostname
+    params[:username] = username if username
   end
 
 end

@@ -53,4 +53,27 @@ describe ApplicationController do
       end
     end
   end
+
+  describe "#username_from_hostname" do
+    it "should return nil if the hostname has less than three parts" do
+      request.host = 'somehost'
+      controller.send(:username_from_hostname).should be_nil
+      request.host = 'example.com'
+      controller.send(:username_from_hostname).should be_nil
+    end
+
+    it "should return the first part if the hostname has at least three parts" do
+      request.host = 'foo.example.com'
+      controller.send(:username_from_hostname).should == 'foo'
+      request.host = 'boo.hoo.example.com'
+      controller.send(:username_from_hostname).should == 'boo'
+    end
+
+    it "should return nil if the first part of the hostname is reserved" do
+      request.host = 'www.example.com'
+      controller.send(:username_from_hostname).should be_nil
+      request.host = 'www.hoo.example.com'
+      controller.send(:username_from_hostname).should be_nil
+    end
+  end
 end
