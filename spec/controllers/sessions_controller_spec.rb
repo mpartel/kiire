@@ -25,7 +25,7 @@ describe SessionsController do
     describe "with no existing credentials" do
       describe "given correct credentials" do
         before do
-          @user = mock_model(User)
+          @user = mock_model(User, :username => 'jayne')
           User.should_receive(:authenticate).with('jayne', 'vera').and_return(@user)
         end
 
@@ -37,6 +37,15 @@ describe SessionsController do
         it "should redirect to index" do
           post_create
           response.should redirect_to(root_path)
+        end
+
+        describe "with username different from the one in the hostname" do
+          it "should redirect so that the hostname has no username" do
+            controller.stub!(:username_from_hostname).and_return('kaylee')
+            controller.stub!(:hostname_without_username).and_return('kiire.fi')
+            post_create
+            response.should redirect_to(root_url :host => 'kiire.fi')
+          end
         end
       end
 
