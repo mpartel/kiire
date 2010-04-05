@@ -2,9 +2,22 @@ require 'spec_helper'
 
 describe SessionsController do
   describe "#new" do
-    it "should render the template" do
+    before do
+      @user = mock_model(User)
+      @user.stub!(:username=).with(nil)
+      User.stub!(:new).and_return(@user)
+    end
+
+    it "should render the template with an empty user" do
       get :new
+      assigns[:user].should == @user
       response.should render_template(:new)
+    end
+
+    it "should prefill the username if the hostname has one" do
+      controller.stub!(:username_from_hostname).and_return('kaylee')
+      @user.should_receive(:username=).with('kaylee')
+      get :new
     end
   end
 

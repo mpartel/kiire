@@ -10,3 +10,10 @@ Feature: Typing the username in the hostname
     When I go to the host "kaylee.kiire.fi"
     Then I should see "Ariel Alliance hospital"
     But I should not see "Log out"
+
+  Scenario: Logging in
+    Given there exists a user "kaylee"
+    And "kaylee" has allowed viewing her places page without logging in
+    And I am on the host "kaylee.kiire.fi"
+    When I follow "Log in"
+    Then the "Username" field should contain "kaylee"
