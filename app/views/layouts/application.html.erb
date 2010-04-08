@@ -17,7 +17,15 @@
       <span><%= link_to t("application.settings"), settings_path, :id => "settings-link" %></span>
       <span><%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout-link' %></span>
     <% elsif !controller.is_a?(SessionsController) %>
-      <span><%= link_to t("application.log_in"), new_session_path, :id => 'login-link' %></span>
+      <%
+        login_path =
+          if username_from_hostname
+            then new_session_path :username => username_from_hostname
+            else new_session_path
+          end
+        login_path = with_regular_hostname(login_path)
+      %>
+      <span><%= link_to t("application.log_in"), login_path, :id => 'login-link' %></span>
     <% end %>
   </div>
 

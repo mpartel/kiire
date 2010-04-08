@@ -1,4 +1,8 @@
 module HostnameHelper
+  def username_from_hostname
+    controller.send(:username_from_hostname)
+  end
+
   def hostname_without_username
     controller.send(:hostname_without_username)
   end

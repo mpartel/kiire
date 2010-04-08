@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @user = User.new
-    @user.username = username_from_hostname
+    @user.username = params[:username] || username_from_hostname
   end
 
   def create

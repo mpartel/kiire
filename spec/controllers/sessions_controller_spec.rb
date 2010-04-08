@@ -19,6 +19,17 @@ describe SessionsController do
       @user.should_receive(:username=).with('kaylee')
       get :new
     end
+
+    it "should prefill the username if there is one in the parameter" do
+      @user.should_receive(:username=).with('kaylee')
+      get :new, :username => 'kaylee'
+    end
+
+    it "should prefer the username in the parameter" do
+      controller.stub!(:username_from_hostname).and_return('jayne')
+      @user.should_receive(:username=).with('kaylee')
+      get :new, :username => 'kaylee'
+    end
   end
 
   describe "#create" do
