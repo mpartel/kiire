@@ -97,9 +97,9 @@ describe IndexController do
           controller.params[:username] = 'foo'
         end
 
-        it "should return the user by that username" do
+        it "should return the user by that username (case-insensitive)" do
           @user = mock_model(User)
-          User.should_receive(:find_by_username).with('foo').and_return(@user)
+          User.should_receive(:find_by_username_case_insensitive).with('foo').and_return(@user)
 
           controller.send(:addressed_user).should == @user
         end
@@ -135,7 +135,7 @@ describe IndexController do
         request.stub!(:host => 'jussi.kiire.fi')
       end
 
-      it "should not set the username parameter" do
+      it "should set the username parameter" do
         controller.send(:apply_hostname)
         controller.params[:username].should == 'jussi'
       end

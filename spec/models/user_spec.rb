@@ -23,8 +23,15 @@ describe User do
       end
 
       it "must be unique" do
-        @user.save
+        @user.save!
         user2 = Factory.build(:user, :username => @user.username)
+        user2.should have(1).error_on(:username)
+      end
+
+      it "must be unique case-insensitively" do
+        @user.username = 'jussi'
+        @user.save!
+        user2 = Factory.build(:user, :username => 'Jussi')
         user2.should have(1).error_on(:username)
       end
 
@@ -130,6 +137,44 @@ describe User do
       result = User.authenticate(@user.username, 'hello')
 
       result.should == @user
+    end
+
+    it "should be case-insensitive with the username" do
+      @user.username = 'jussi'
+      hashed_password = Digest::SHA1.hexdigest('hello')
+      @user.password_hash = hashed_password
+      @user.save!
+
+      result = User.authenticate('Jussi', 'hello')
+
+      result.should == @user
+    end
+  end
+
+  describe "#find_by_username_case_insensitive" do
+    describe "when there are no matching users" do
+      it "should return nil" do
+        @user.destroy
+        User.find_by_username_case_insensitive('jussi').should be_nil
+      end
+    end
+
+    describe "when there is one matching user" do
+      describe "with matching case" do
+        it "should find it" do
+          @user.username = 'jussi'
+          @user.save!
+          User.find_by_username_case_insensitive('jussi').should == @user
+        end
+      end
+
+      describe "with mismatching case" do
+        it "should find it" do
+          @user.username = 'jussi'
+          @user.save!
+          User.find_by_username_case_insensitive('Jussi').should == @user
+        end
+      end
     end
   end
 

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :places, :dependent => :destroy
 
   validates_presence_of :username
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :case_sensitive => false
   validate :username_must_be_alphanumeric_with_dashes_and_underscores
 
   attr_accessor :password, :password_confirmation
@@ -13,13 +13,22 @@ class User < ActiveRecord::Base
 
   def self.authenticate(username, password)
     hash = hash_password(password)
-    return User.find_by_username_and_password_hash(username, hash)
+    exact_match = User.find_by_username_and_password_hash(username, hash)
+    if exact_match
+      return exact_match
+    else
+      return User.find_all_by_password_hash(hash).select { |u| u.username.downcase == username.downcase }.first
+    end
   end
 
   def self.hash_password(plaintext)
     require 'rubygems'
     require 'digest'
     Digest::SHA1.hexdigest(plaintext.to_s)
+  end
+
+  def self.find_by_username_case_insensitive(username)
+    User.all.select { |u| u.username.downcase == username.downcase }.first
   end
 
   def get_setting(key)

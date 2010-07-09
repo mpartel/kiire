@@ -14,7 +14,7 @@ protected
     if current_user
       current_user
     elsif params[:username]
-      User.find_by_username(params[:username])
+      User.find_by_username_case_insensitive(params[:username])
     end
   end
 
