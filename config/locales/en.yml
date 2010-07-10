@@ -34,6 +34,7 @@ en:
   settings:
     title: Settings
     back: Back
+    saved: Saved successfully
     places:
       title: My Places
       edit: edit
@@ -46,6 +47,7 @@ en:
     options:
       title: Options
       dont_require_login: Don't require login
+      show_via_field: Show "via" field
       save: Save
 
   places:

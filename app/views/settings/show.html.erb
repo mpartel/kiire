@@ -38,8 +38,11 @@
 <h2><%= t("settings.options.title") %></h2>
 <% form_tag settings_path, :method => :put do %>
   <div>
-    <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login") %>
+    <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login", :username => current_user.username) %>
     <%= check_box_tag "settings[dont_require_login]", '1', current_user.get_setting(:dont_require_login).value %>
+
+    <%= label_tag "settings[show_via_field]", t("settings.options.show_via_field") %>
+    <%= check_box_tag "settings[show_via_field]", '1', current_user.get_setting(:show_via_field).value %>
 
     <%= submit_tag t("settings.options.save") %>
   </div>

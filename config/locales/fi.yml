@@ -34,6 +34,7 @@ fi:
   settings:
     title: Asetukset
     back: Takaisin
+    saved: Tallennettu
     places:
       title: Omat paikat
       edit: muuta
@@ -45,7 +46,8 @@ fi:
       add_place: Lisää paikka
     options:
       title: Asetukset
-      dont_require_login: Älä vaadi kirjautumista
+      dont_require_login: Älä vaadi kirjautumista (suora pääsy {{username}}.kiire.fi)
+      show_via_field: Näytä "kautta"-kenttä
       save: Tallenna
 
   places:
