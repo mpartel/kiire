@@ -192,7 +192,7 @@ describe User do
   end
 
   describe "#get_setting" do
-    describe "when the setting doesn't exists" do
+    describe "when the setting doesn't exist" do
       it "should return a new setting with a default value" do
         Setting.should_receive(:default_value).with('foo').and_return('bar')
         result = @user.get_setting('foo')
@@ -206,6 +206,23 @@ describe User do
       it "should return the setting" do
         setting = Factory.create(:setting, :user => @user, :key => 'foo')
         @user.get_setting(:foo).should == setting
+      end
+    end
+  end
+
+  describe "#get_setting_value" do
+    describe "when the setting doesn't exist" do
+      it "should return a new setting with a default value" do
+        Setting.should_receive(:default_value).with('foo').and_return('bar')
+        result = @user.get_setting_value('foo')
+        result.should == 'bar'
+      end
+    end
+
+    describe "when the setting exists" do
+      it "should return the setting" do
+        setting = Factory.create(:setting, :user => @user, :key => 'foo', :value => 'boo')
+        @user.get_setting_value(:foo).should == 'boo'
       end
     end
   end

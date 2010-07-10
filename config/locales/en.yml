@@ -8,6 +8,7 @@ en:
   index:
     from: From
     to: To
+    via: Via
     go_now: GO
 
   session:

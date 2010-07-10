@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     settings.find_by_key(key) || settings.build(:key => key, :value => Setting.default_value(key))
   end
 
+  def get_setting_value(key)
+    get_setting(key).value
+  end
+
 private
 
   def username_must_be_alphanumeric_with_dashes_and_underscores

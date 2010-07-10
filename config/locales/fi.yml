@@ -8,6 +8,7 @@ fi:
   index:
     from: Mistä
     to: Mihin
+    via: Kautta
     go_now: Opasta
 
   session:

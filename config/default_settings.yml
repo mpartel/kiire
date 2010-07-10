@@ -1,4 +1,5 @@
 ---
 dont_require_login:
+show_via_field:
 reittiopas:
   nroutes: 3

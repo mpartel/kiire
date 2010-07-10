@@ -9,8 +9,14 @@
       </div>
       <div class="place-field-container" id="to-container">
         <label for="to"><%= t("index.to") %></label>
-        <input class="place" type="text" id="to" name="from" />
+        <input class="place" type="text" id="to" name="to" />
       </div>
+      <% if @show_via_field %>
+        <div class="place-field-container" id="via-container">
+          <label for="via"><%= t("index.via") %></label>
+          <input class="place" type="text" id="via" name="via" />
+        </div>
+      <% end %>
     </td>
     <td>
       <button id="go"><%= t("index.go_now") %></button>

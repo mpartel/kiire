@@ -60,25 +60,37 @@ $(document).ready(function() {
 
     this.from = new PlaceField('from');
     this.to = new PlaceField('to');
+    this.via = $('input#via').length > 0 ? new PlaceField('via') : null;
 
     this.goButton = $('button#go');
 
-    this.from.theOtherField = this.to;
-    this.to.theOtherField = this.from;
+    this.fields = [this.from, this.to];
+    if (this.via) {
+      this.fields.push(this.via);
+    }
+
+    this.from.nextField = this.to;
+    if (this.via) {
+      this.to.nextField = this.via;
+      this.via.nextField = this.from;
+    } else {
+      this.to.nextField = this.from;
+    }
+
+    this.$allFieldElements = $($.map(this.fields, function(f) { return f.element }));
 
     this.fieldByElement = function(element) {
-      if (element == self.from.element) {
-        return self.from;
-      } else if (element == self.to.element) {
-        return self.to;
-      } else {
-        return null;
+      for (var i = 0; i < self.fields.length; ++i) {
+        if (self.fields[i].element == element) {
+          return self.fields[i];
+        }
       }
+      return null;
     }
 
     this.programFocus = function() {
       function switchPlaceFieldFocus(field) {
-        $(field.theOtherField.element).removeClass('focused-place-field');
+        self.$allFieldElements.removeClass('focused-place-field');
         self.targetField = field;
         $(field.element).addClass('focused-place-field');
         return true;
@@ -110,8 +122,9 @@ $(document).ready(function() {
     }
 
     this.clearForm = function() {
-      this.from.element.value = "";
-      this.to.element.value = "";
+      $.each(self.fields, function() {
+        this.element.value = "";
+      });
     }
 
     this.initialize = function() {
@@ -125,7 +138,7 @@ $(document).ready(function() {
 
     this.selectPlace = function(place) {
       this.targetField.setValue(place.getAddressForBackend('reittiopas'));
-      this.targetField.theOtherField.focus();
+      this.targetField.nextField.focus();
     }
 
     this.goNow = function() {
@@ -136,6 +149,11 @@ $(document).ready(function() {
         timetype: 'departure',
         nroutes: 5
       };
+
+      if (this.via && this.via.getValue() != '') {
+        params['searchformtype'] = 'advanced';
+        params['via_in'] = this.via.getValue()
+      }
 
       var queryString = [];
       $.each(params, function(key, value) {

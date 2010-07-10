@@ -12,6 +12,7 @@ describe IndexController do
       controller.stub!(:check_authorization)
       @places = mock(Array)
       @user.stub!(:places => @places)
+      @user.stub!(:get_setting_value).with(:show_via_field).and_return('1')
     end
 
     it "should render the template" do
@@ -22,6 +23,11 @@ describe IndexController do
     it "should assign the user's places" do
       get :index
       assigns[:places].should == @places
+    end
+
+    it "should assign tell the view whether to show the via field" do
+      get :index
+      assigns[:show_via_field].should == '1'
     end
   end
 
