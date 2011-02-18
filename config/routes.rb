@@ -1,10 +1,9 @@
-ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'index'
-  map.resource :session
-  map.resources :users
-  map.resource :settings
-  map.resources :places
-  map.resource :info
-
-  map.user_places ':username', :controller => 'index', :action => 'index'
+Kiire::Application.routes.draw do
+  match '/' => 'index#index', :as => 'root'
+  resource :session
+  resources :users
+  resource :settings
+  resources :places
+  resource :info
+  match ':username' => 'index#index', :as => :user_places
 end

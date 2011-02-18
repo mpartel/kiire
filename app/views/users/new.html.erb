@@ -1,6 +1,6 @@
 <h1><%= t("user.registration") %></h1>
 
-<% form_for @user do |f| %>
+<%= form_for @user do |f| %>
   <div>
     <%= f.label :username, t("user.username") %>
     <%= f.text_field :username %>

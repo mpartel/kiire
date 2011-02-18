@@ -1,5 +1,5 @@
 Given /^I have no active session$/ do
-  cookies.clear
+  #cookies.clear
 end
 
 Given /^I have logged in(?: as "([^"]*)")?$/ do |username|

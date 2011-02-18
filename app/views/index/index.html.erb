@@ -33,7 +33,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     <% @places.each do |place| %>
-      new Place(<%= place.client_attributes.to_json %>);
+      new Place(<%= raw(place.client_attributes.to_json) %>);
     <% end %>
   });
 </script>

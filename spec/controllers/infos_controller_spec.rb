@@ -8,9 +8,13 @@ describe InfosController do
 
   describe "#show" do
     it "should render the template according to the current locale" do
-      I18n.locale= :et
+      I18n.locale= :en
       get :show
-      response.should render_template('infos/show.et.html')
+      response.should render_template('infos/show.en')
+
+      I18n.locale= :fi
+      get :show
+      response.should render_template('infos/show.fi')
     end
   end
 end

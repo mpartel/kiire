@@ -25,7 +25,7 @@
   </table>
 <% end %>
 
-<% form_for @new_place do |f| %>
+<%= form_for @new_place do |f| %>
   <div>
     <%= f.label :name, t("settings.new_place.name")  %>
     <%= f.text_field :name %>
@@ -36,7 +36,7 @@
 </div>
 
 <h2><%= t("settings.options.title") %></h2>
-<% form_tag settings_path, :method => :put do %>
+<%= form_tag settings_path, :method => :put do %>
   <div>
     <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login", :username => current_user.username) %>
     <%= check_box_tag "settings[dont_require_login]", '1', current_user.get_setting(:dont_require_login).value %>

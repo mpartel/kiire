@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%= I18n.locale %>">
-
+<!DOCTYPE html>
+<html>
 <head>
-  <title>kiire.fi</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <%= stylesheet_link_tag 'style.css'  %>
+  <title>Kiire</title>
+  <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag 'jquery-1.4.1.min.js' %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
-
   <div id="header">
     <% if logged_in? %>
       <span><%= link_to t("application.start_page"), root_path  %></span>
@@ -42,5 +38,6 @@
   <div id="main">
     <%= yield %>
   </div>
+
 </body>
 </html>

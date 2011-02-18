@@ -1,3 +1,5 @@
+require 'lib/backends.rb'
+
 class PlaceSetting < ActiveRecord::Base
   belongs_to :place
 

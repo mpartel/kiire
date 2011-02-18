@@ -3,7 +3,7 @@ class Setting < ActiveRecord::Base
   validates_presence_of :user, :key
   validates_uniqueness_of :key, :scope => :user_id
 
-  DEFAULT_SETTINGS_PATH = File.join(RAILS_ROOT, 'config', 'default_settings.yml')
+  DEFAULT_SETTINGS_PATH = File.join(Rails.root, 'config', 'default_settings.yml')
 
   def self.default_value(key)
     @default_settings = YAML.load_file(DEFAULT_SETTINGS_PATH) unless @default_settings

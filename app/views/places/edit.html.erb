@@ -1,6 +1,6 @@
 <h1><%= h @place.name %></h1>
 
-<% form_for @place do |f| %>
+<%= form_for @place do |f| %>
   <div>
     <%= f.label :name, t("places.name") %>
     <%= f.text_field :name %>

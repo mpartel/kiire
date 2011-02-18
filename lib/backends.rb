@@ -1,3 +1,5 @@
+require 'lib/backends/reittiopas.rb'
+
 module Backends
   Default = Backends::Reittiopas
 
