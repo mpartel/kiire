@@ -10,7 +10,6 @@ module Backends
   def self.all
     classes = self.constants.map {|c| self.const_get(c) }
     classes = classes.select {|c| c.superclass == Backends::Backend }
-    classes - [Backends::Backend]
     classes.uniq!
     return classes
   end
