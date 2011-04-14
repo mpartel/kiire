@@ -40,14 +40,14 @@ fi:
       title: Omat paikat
       edit: muuta
       delete: poista
-      confirm_delete: Poistetaanko {{place}} oikeasti?
+      confirm_delete: "Poistetaanko %{place} oikeasti?"
     new_place:
       title: Uusi paikka
       name: Nimi
       add_place: Lisää paikka
     options:
       title: Asetukset
-      dont_require_login: Älä vaadi kirjautumista (suora pääsy {{username}}.kiire.fi)
+      dont_require_login: "Älä vaadi kirjautumista (suora pääsy %{username}.kiire.fi)"
       show_via_field: Näytä "kautta"-kenttä
       save: Tallenna
 

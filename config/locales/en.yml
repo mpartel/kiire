@@ -40,14 +40,14 @@ en:
       title: My Places
       edit: edit
       delete: delete
-      confirm_delete: Really delete {{place}}?
+      confirm_delete: "Really delete %{place}?"
     new_place:
       title: New place
       name: Name
       add_place: Add place
     options:
       title: Options
-      dont_require_login: Don't require login
+      dont_require_login: "Don't require login (direct access via %{username}.kiire.fi)"
       show_via_field: Show "via" field
       save: Save
 
