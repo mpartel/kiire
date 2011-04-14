@@ -4,7 +4,7 @@ gem 'rails', '~> 3.0'
 
 gem 'sqlite3-ruby', '~> 1.3.3', :require => 'sqlite3'
 
-group :test do
+group :development, :test do
   gem 'rspec-rails', '~> 2.5'
   gem 'factory_girl', '~> 1.3'
   gem 'factory_girl_rails', '~> 1.0'
