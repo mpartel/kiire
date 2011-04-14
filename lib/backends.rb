@@ -1,7 +1,7 @@
 require 'lib/backends/reittiopas.rb'
 
 module Backends
-  Default = Backends::Reittiopas
+  Default = Backends::Reittiopas unless const_defined? 'Default'
 
   def self.by_name(name)
     self.const_get(name.to_s.camelize(:upper))
