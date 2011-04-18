@@ -29,7 +29,7 @@ protected
 
   def username_from_hostname
     parts = request.host.split('.')
-    if parts.length > 2
+    if parts.length > 2 && !ip_address?(request.host)
       username = parts.first
       return username unless reserved_hostname_prefixes.include? username
     end
@@ -39,11 +39,17 @@ protected
 
   def hostname_without_username
     parts = request.host.split('.')
-    if parts.length > 2 and !reserved_hostname_prefixes.include?(parts.first)
+    if parts.length > 2 &&
+       !reserved_hostname_prefixes.include?(parts.first) &&
+       !ip_address?(request.host)
       parts.reverse.take(2).reverse.join '.'
     else
       request.host
     end
+  end
+
+  def ip_address?(str)
+    !!(str =~ /\d+\.\d+\.\d+\.\d+/)
   end
 
   def reserved_hostname_prefixes

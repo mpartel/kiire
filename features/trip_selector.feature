@@ -10,13 +10,14 @@ Feature: Trip selector
     Then I should see "Home"
     And I should see "Work"
 
-  # Problematic. Might have to use Selenium or something..
-  Scenario Outline: Selecting two locations and finding a trip
+  @javascript
+  Scenario: Selecting two locations and finding a trip
     Given I have saved a place "Home"
     And I have saved a place "Work"
     And I have logged in
-    When I click "Home"
-    And I click "Work"
+    When I click on the place "Home"
+    And I click on the place "Work"
+    And I wait for JavaScript
     And I press "GO"
     Then I should be shown the trip from "Home" to "Work"
 

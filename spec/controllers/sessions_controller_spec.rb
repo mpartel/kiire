@@ -70,6 +70,15 @@ describe SessionsController do
             post_create
             response.should redirect_to(root_url :host => 'kiire.fi')
           end
+
+          it "should redirect so that the port number is preserved" do
+            controller.stub!(:username_from_hostname).and_return('kaylee')
+            controller.stub!(:hostname_without_username).and_return('kiire.fi')
+            #request.port = 1234 # the corresponding getter doesn't work for no apparent reason
+            request.stub!(:port => 1234)
+            post_create
+            response.should redirect_to(root_url :host => 'kiire.fi', :port => 1234)
+          end
         end
       end
 

@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
       session[:current_user_id] = user.id
 
       if username_from_hostname != user.username
-        redirect_to root_url(:host => hostname_without_username)
+        if request_at_default_port?
+          redirect_to root_url(:host => hostname_without_username)
+        else
+          redirect_to root_url(:host => hostname_without_username, :port => request.port)
+        end
       else
         redirect_to root_path
       end
@@ -28,5 +32,11 @@ class SessionsController < ApplicationController
 
 protected
   def check_authorization
+  end
+
+private
+  def request_at_default_port?
+    (request.scheme == 'http' && request.port == 80) ||
+      (request.scheme == 'https' && request.port == 443)
   end
 end

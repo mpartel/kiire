@@ -75,6 +75,13 @@ describe ApplicationController do
       request.host = 'www.hoo.example.com'
       controller.send(:username_from_hostname).should be_nil
     end
+
+    it "should return nil if the hostname is an IPv4 address" do
+      request.host = '127.0.0.1'
+      controller.send(:username_from_hostname).should be_nil
+      request.host = '241.8.32.11'
+      controller.send(:username_from_hostname).should be_nil
+    end
   end
 
   describe "hostname_without_username" do
@@ -98,6 +105,13 @@ describe ApplicationController do
         controller.send(:hostname_without_username).should == 'www.example.com'
         request.host = 'www.funny.example.com'
         controller.send(:hostname_without_username).should == 'www.funny.example.com'
+      end
+
+      it "should return an IPv4 address unchanged" do
+        request.host = '127.0.0.1'
+        controller.send(:hostname_without_username).should == '127.0.0.1'
+        request.host = '42.123.1.44'
+        controller.send(:hostname_without_username).should == '42.123.1.44'
       end
     end
   end
