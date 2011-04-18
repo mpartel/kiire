@@ -14,7 +14,6 @@ Feature: Mobile version of Reittiopas
     And I go to the home page
     And I click on the place "Home"
     And I click on the place "Work"
-    And I wait for JavaScript
     And I press "GO"
     Then I should be shown the trip from "Home" to "Work" on the mobile version
 

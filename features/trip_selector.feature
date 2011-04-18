@@ -17,7 +17,6 @@ Feature: Trip selector
     And I have logged in
     When I click on the place "Home"
     And I click on the place "Work"
-    And I wait for JavaScript
     And I press "GO"
     Then I should be shown the trip from "Home" to "Work"
 
