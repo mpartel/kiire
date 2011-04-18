@@ -7,7 +7,7 @@ class SettingsController < ApplicationController
   def update
     user = current_user
     
-    settings_to_save = ['dont_require_login', 'show_via_field']
+    settings_to_save = ['dont_require_login', 'show_via_field', 'mobile_reittiopas']
     settings_to_save.each do |key|
       setting = user.get_setting(key)
       setting.value = if params[:settings] then params[:settings][key] else nil end

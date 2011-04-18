@@ -5,7 +5,13 @@ end
 
 Then /^I should be shown the trip from "([^"]*)" to "([^"]*)"$/ do |from, to|
   # This even works without an internet connection
-  for part in ['reittiopas.fi', 'from_in=Home', 'to_in=Work']
+  for part in ['reittiopas.fi', 'from_in=' + from, 'to_in=' + to]
+    current_url.should include(part)
+  end
+end
+
+Then /^I should be shown the trip from "([^"]*)" to "([^"]*)" on the mobile version$/ do |from, to|
+  for part in ['aikataulut.hsl.fi/reittiopas-pda', 'keya=' + from, 'keyb=' + to]
     current_url.should include(part)
   end
 end

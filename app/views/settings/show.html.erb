@@ -43,6 +43,21 @@
 
     <%= label_tag "settings[show_via_field]", t("settings.options.show_via_field") %>
     <%= check_box_tag "settings[show_via_field]", '1', current_user.get_setting(:show_via_field).value %>
+  </div>
+
+  <h2><%= t("settings.options.mobile_reittiopas.title", :link => (link_to 'm.reittiopas.fi', 'http://m.reittiopas.fi', :target => '_blank')).html_safe %></h2>
+  <div>
+    <div class="radiogroup">
+      <div>
+        <%= radio_button_tag "settings[mobile_reittiopas]", 'never', current_user.get_setting(:mobile_reittiopas).value == 'never' %>
+        <%= label_tag "settings[mobile_reittiopas][never]", t("settings.options.mobile_reittiopas.never") %>
+      </div>
+
+      <div>
+        <%= radio_button_tag "settings[mobile_reittiopas]", 'always', current_user.get_setting(:mobile_reittiopas).value == 'always' %>
+        <%= label_tag "settings[mobile_reittiopas][always]", t("settings.options.mobile_reittiopas.always") %>
+      </div>
+    </div>
 
     <%= submit_tag t("settings.options.save") %>
   </div>

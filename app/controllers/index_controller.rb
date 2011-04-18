@@ -3,6 +3,7 @@ class IndexController < ApplicationController
   def index
     @places = addressed_user.places
     @show_via_field = addressed_user.get_setting_value(:show_via_field)
+    @mobile_reittiopas = addressed_user.get_setting_value(:mobile_reittiopas)
   end
 
 protected

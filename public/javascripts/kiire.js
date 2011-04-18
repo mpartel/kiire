@@ -1,3 +1,4 @@
+var Kiire = null;
 var places = {};
 
 function Place(attribs) {
@@ -21,12 +22,10 @@ function Place(attribs) {
   this.element = $('#place-' + this.id)[0];
 
   $(this.element).click(function() {
-    UI.selectPlace(self);
+    Kiire.selectPlace(self);
     return false;
   });
 }
-
-UI = null;
 
 $(document).ready(function() {
 
@@ -55,12 +54,13 @@ $(document).ready(function() {
     }
   }
 
-  UI = new function() {
+  Kiire = new function() {
     var self = this;
 
     this.from = new PlaceField('from');
     this.to = new PlaceField('to');
     this.via = $('input#via').length > 0 ? new PlaceField('via') : null;
+    this.mobileReittiopasSetting = 'never';
 
     this.goButton = $('button#go');
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
       this.to.nextField = this.from;
     }
 
-    this.$allFieldElements = $($.map(this.fields, function(f) { return f.element }));
+    this.$allFieldElements = $($.map(this.fields, function(f) {return f.element}));
 
     this.fieldByElement = function(element) {
       for (var i = 0; i < self.fields.length; ++i) {
@@ -135,6 +135,13 @@ $(document).ready(function() {
       this.from.focus();
     }
 
+    this.setMobileReittiopasSetting = function(setting) {
+      this.mobileReittiopasSetting = setting;
+    }
+
+    this.shouldUseMobileVersion = function() {
+      return (this.mobileReittiopasSetting == 'always');
+    }
 
     this.selectPlace = function(place) {
       this.targetField.setValue(place.getAddressForBackend('reittiopas'));
@@ -142,13 +149,25 @@ $(document).ready(function() {
     }
 
     this.goNow = function() {
-      var baseUrl = 'http://www.reittiopas.fi';
-      var params = {
-        from_in: this.from.getValue(),
-        to_in: this.to.getValue(),
-        timetype: 'departure',
-        nroutes: 5
-      };
+
+      var baseUrl;
+      var params;
+
+      if (!this.shouldUseMobileVersion()) {
+        baseUrl = 'http://www.reittiopas.fi';
+        params = {
+          from_in: this.from.getValue(),
+          to_in: this.to.getValue(),
+          timetype: 'departure',
+          nroutes: 5
+        };
+      } else {
+        baseUrl = 'http://aikataulut.hsl.fi/reittiopas-pda/fi/';
+        params = {
+          keya: this.from.getValue(),
+          keyb: this.to.getValue()
+        };
+      }
 
       if (this.via && this.via.getValue() != '') {
         params['searchformtype'] = 'advanced';

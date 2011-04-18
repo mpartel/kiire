@@ -50,6 +50,16 @@ form button {
   margin-bottom: 0.6em;
 }
 
+.radiogroup label,
+.radiogroup div.label {
+  display: inline;
+}
+
+.radiogroup input[type=radio] {
+  display: inline;
+  margin-left: 2em;
+}
+
 form.edit_place input[type=text] {
   width: 26em;
 }

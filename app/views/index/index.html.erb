@@ -35,5 +35,6 @@
     <% @places.each do |place| %>
       new Place(<%= raw(place.client_attributes.to_json) %>);
     <% end %>
+    Kiire.setMobileReittiopasSetting(<%= raw(@mobile_reittiopas.to_json) %>);
   });
 </script>

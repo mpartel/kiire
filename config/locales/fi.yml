@@ -49,6 +49,10 @@ fi:
       title: Asetukset
       dont_require_login: "Älä vaadi kirjautumista (suora pääsy %{username}.kiire.fi)"
       show_via_field: Näytä "kautta"-kenttä
+      mobile_reittiopas:
+        title: Reittioppaan mobiiliversio (%{link})
+        never: Käytä tavallista Reittiopasta
+        always: Käytä mobiiliversiota
       save: Tallenna
 
   places:
