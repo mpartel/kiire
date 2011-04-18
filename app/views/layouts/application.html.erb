@@ -3,15 +3,16 @@
 <head>
   <title>Kiire</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag 'jquery-1.4.1.min.js' %>
+  <%= javascript_include_tag 'jquery.min.js' %>
+  <%= javascript_include_tag 'rails.js' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
   <div id="header">
     <% if logged_in? %>
-      <span><%= link_to t("application.start_page"), root_path  %></span>
+      <span><%= link_to t("application.start_page"), root_path %></span>
       <span><%= link_to t("application.settings"), settings_path, :id => "settings-link" %></span>
-      <span><%= link_to t("application.log_out"), session_path, :method => 'delete', :id => 'logout-link' %></span>
+      <span><%= link_to t("application.log_out"), session_path, { :method => :delete }, { :id => 'logout-link' } %></span>
     <% elsif !controller.is_a?(SessionsController) %>
       <%
         login_path =

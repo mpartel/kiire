@@ -12,5 +12,6 @@ group :development, :test do
   gem 'cucumber-rails', '~> 0.4'
   gem 'capybara', '~> 0.4'
   gem 'database_cleaner', '~> 0.6'
+  gem 'jquery-rails', '~> 0.2'
 end
 
