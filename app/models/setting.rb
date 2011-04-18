@@ -1,6 +1,7 @@
 class Setting < ActiveRecord::Base
   belongs_to :user
-  validates_presence_of :user, :key
+  validates :user, :presence => true
+  validates :key, :presence => true
   validates_uniqueness_of :key, :scope => :user_id
 
   DEFAULT_SETTINGS_PATH = File.join(Rails.root, 'config', 'default_settings.yml')

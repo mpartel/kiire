@@ -2,7 +2,7 @@ class Place < ActiveRecord::Base
   belongs_to :user
   has_many :settings, :class_name => 'PlaceSetting'
 
-  validates_presence_of :name
+  validates :name, :presence => true
 
   def get_setting(key, backend = nil)
     backend = backend.name if backend.is_a?(Class)

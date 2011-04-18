@@ -3,7 +3,8 @@ require 'lib/backends.rb'
 class PlaceSetting < ActiveRecord::Base
   belongs_to :place
 
-  validates_presence_of :place, :key
+  validates :place, :presence => true
+  validates :key, :presence => true
   validates_uniqueness_of :key, :scope => [:place_id, :backend]
   validate :backend_must_exist
 

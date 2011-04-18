@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :settings, :dependent => :destroy
   has_many :places, :dependent => :destroy
 
-  validates_presence_of :username
+  validates :username, :presence => true
   validates_uniqueness_of :username, :case_sensitive => false
   validate :username_must_be_alphanumeric_with_dashes_and_underscores
 
