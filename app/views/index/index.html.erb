@@ -26,7 +26,7 @@
 
 <ul id="places">
   <% @places.each do |place| %>
-    <li class="place" id="place-<%= place.id %>"><%= h place.name %></li>
+    <li class="place" id="place-<%= place.id %>"><%= place.name %></li>
   <% end %>
 </ul>
 

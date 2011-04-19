@@ -9,7 +9,7 @@
     <% @places.each do |place| %>
       <tr>
         <td>
-          <%= h place.name  %>
+          <%= place.name  %>
         </td>
         <td class="edit">
           <%= link_to t("settings.places.edit"), edit_place_path(place) %>
