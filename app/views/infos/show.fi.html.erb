@@ -39,14 +39,9 @@
 <p>
   Palvelu olisi paljon vähemmän hyödyllinen,
   jos siihen täytyisi aina kirjautua ennen käyttöä.
-  Käyttäjälle tarjotaan tämän vuoksi erilaisia vaihtoehtoja
-  kätevyys&mdash;tietoturva-asteikolla:
+  Siksi palvelua voi halutessaan käyttää ilman kirjautumista.
+  Asetusten muuttamiseen tarvitaan silti aina kirjautuminen.
 </p>
-<ol>
-  <li>Pääsy ilman salasanaa. Salasanaa vaaditaan vain asetusten muuttamiseen.</li>
-  <li>Kirjautumisen muistaminen selaimen evästeessä, vaikka selain suljetaan. [tulossa, luultavasti oletusarvoksi]</li>
-  <li>Perinteinen tapa: kirjautuminen voimassa selaimen sulkemiseen asti.</li>
-</ol>
 
 <h2>Tulevia parannuksia</h2>
 <p>
@@ -55,6 +50,7 @@
 </p>
 <ul>
   <li><span class="strike">Demotunnukset</span></li>
+  <li><span class="strike">Tuki reittioppaan mobiiliversiolle</span></li>
   <li>Käyttäjätunnuksen ja/tai kirjautumisen muistaminen evästeellä</li>
   <li>Paikkojen uudelleenjärjestäminen</li>
   <li>Sivulatauksien nopeuttaminen entisestään (välimuistitus, mod_passenger, ...)</li>
@@ -74,6 +70,10 @@
 <h2>Teknistä</h2>
 <p>
   Palvelu on toteutettu Ruby on Railsilla ja SQLite-tietokannalla,
-  ja se sijaitsee
-  <a href="http://www.nodeta.fi/hosting">Nodetan webhotellissa</a>.
+  ja se sijaitsee <span class="strike">Nodetan</span>
+  <a href="http://www.neutech.fi/">Neutechin webhotellissa</a>.
+</p>
+
+<p>
+  <%= link_to "Takaisin alkuun", root_path %>
 </p>
