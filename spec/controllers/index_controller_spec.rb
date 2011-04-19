@@ -13,7 +13,7 @@ describe IndexController do
       @places = mock(Array)
       @user.stub!(:places => @places)
       @user.stub!(:get_setting_value).with(:show_via_field).and_return('1')
-      @user.stub!(:get_setting_value).with(:mobile_reittiopas).and_return('always')
+      @user.stub!(:get_setting_value).with(:mobile_browsers).and_return(nil)
     end
 
     it "should render the template" do
@@ -31,9 +31,28 @@ describe IndexController do
       assigns[:show_via_field].should == '1'
     end
 
-    it "should pass the mobile Reittiopas setting to the view" do
-      get :index
-      assigns[:mobile_reittiopas].should == 'always'
+    describe "when using a regular browser" do
+      before do
+        @user.stub!(:get_setting_value).with(:mobile_browsers).and_return("*Fennec*\n*Mobile*")
+        request.env['HTTP_USER_AGENT'] = 'ARegularBrowser'
+      end
+
+      it "should tell the view not to use mobile Reittiopas" do
+        get :index
+        assigns[:mobile_browser].should == false
+      end
+    end
+
+    describe "when using a mobile browser" do
+      before do
+        @user.stub!(:get_setting_value).with(:mobile_browsers).and_return("*Fennec*\n*Mobile*")
+        request.env['HTTP_USER_AGENT'] = 'AMobileBrowser'
+      end
+
+      it "should tell the view not to use mobile Reittiopas" do
+        get :index
+        assigns[:mobile_browser].should == true
+      end
     end
 
   end

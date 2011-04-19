@@ -1,6 +1,6 @@
 ---
 dont_require_login:
 show_via_field:
-mobile_reittiopas: "never"
+mobile_browsers:
 reittiopas:
   nroutes: 3

@@ -20,11 +20,17 @@ describe SettingsController do
       get :show
       assigns[:new_place].should == @new_place
     end
+
+    it "should assign the current user agent" do
+      request.env['HTTP_USER_AGENT'] = 'Testbrowser'
+      get :show
+      assigns[:user_agent].should == 'Testbrowser'
+    end
   end
 
   describe "#update" do
     before do
-      setting_keys = [:dont_require_login, :show_via_field, :mobile_reittiopas]
+      setting_keys = [:dont_require_login, :show_via_field, :mobile_browsers]
 
       @settings = setting_keys.map do |name|
         obj = mock_model(Setting)
@@ -41,7 +47,7 @@ describe SettingsController do
           'settings' => {
             'dont_require_login' => '1',
             'show_via_field' => '0',
-            'mobile_reittiopas' => 'always'
+            'mobile_browsers' => "*Fennec*\n*iPod*"
           }
         }
       end
@@ -59,8 +65,8 @@ describe SettingsController do
       end
 
       it "should save mobile_version" do
-        @settings[:mobile_reittiopas].should_receive(:value=).with('always')
-        @settings[:mobile_reittiopas].should_receive(:save!)
+        @settings[:mobile_browsers].should_receive(:value=).with("*Fennec*\n*iPod*")
+        @settings[:mobile_browsers].should_receive(:save!)
         put_update
       end
 

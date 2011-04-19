@@ -9,7 +9,7 @@ Feature: Mobile version of Reittiopas
     And I have saved a place "Work"
     And I have logged in
     When I go to the settings page
-    And I choose "Use mobile Reittiopas"
+    And I fill in "*" for "settings[mobile_browsers]"
     And I press "Save"
     And I go to the home page
     And I click on the place "Home"

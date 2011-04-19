@@ -50,17 +50,17 @@ form button {
   margin-bottom: 0.6em;
 }
 
-div.radiogroup label,
-div.radiogroup div.label,
+div.field-group {
+  margin-left: 1em;
+}
+
 div.checkbox label,
 div.checkbox div.label {
   display: inline;
 }
 
-div.radiogroup input[type=radio],
 div.checkbox input[type=checkbox] {
   display: inline;
-  margin-left: 2em;
 }
 
 form.edit_place input[type=text] {
@@ -71,6 +71,10 @@ input[type=button],
 input[type=submit],
 button {
   margin-top: 1em;
+}
+
+.hint {
+  font-size: 8pt;
 }
 
 #header {

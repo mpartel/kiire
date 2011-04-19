@@ -37,30 +37,29 @@
 
 <h2><%= t("settings.options.title") %></h2>
 <%= form_tag settings_path, :method => :put do %>
-  <div class="checkbox">
-    <%= check_box_tag "settings[dont_require_login]", '1', current_user.get_setting(:dont_require_login).value %>
-    <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login", :username => current_user.username) %>
-  </div>
-  
-  <div class="checkbox">
-    <%= check_box_tag "settings[show_via_field]", '1', current_user.get_setting(:show_via_field).value %>
-    <%= label_tag "settings[show_via_field]", t("settings.options.show_via_field") %>
-  </div>
-
-  <h2><%= t("settings.options.mobile_reittiopas.title", :link => (link_to 'm.reittiopas.fi', 'http://m.reittiopas.fi', :target => '_blank')).html_safe %></h2>
   <div>
-    <div class="radiogroup">
-      <div>
-        <%= radio_button_tag "settings[mobile_reittiopas]", 'never', current_user.get_setting(:mobile_reittiopas).value == 'never' %>
-        <%= label_tag "settings[mobile_reittiopas][never]", t("settings.options.mobile_reittiopas.never") %>
+    <div class="field-group">
+      <div class="checkbox">
+        <%= check_box_tag "settings[dont_require_login]", '1', current_user.get_setting_value(:dont_require_login) %>
+        <%= label_tag "settings[dont_require_login]", t("settings.options.dont_require_login", :username => current_user.username) %>
       </div>
 
-      <div>
-        <%= radio_button_tag "settings[mobile_reittiopas]", 'always', current_user.get_setting(:mobile_reittiopas).value == 'always' %>
-        <%= label_tag "settings[mobile_reittiopas][always]", t("settings.options.mobile_reittiopas.always") %>
+      <div class="checkbox">
+        <%= check_box_tag "settings[show_via_field]", '1', current_user.get_setting_value(:show_via_field) %>
+        <%= label_tag "settings[show_via_field]", t("settings.options.show_via_field") %>
       </div>
     </div>
 
+    <h2><%= t("settings.options.mobile_browsers.title") %></h2>
+    <div class="field-group">
+      <p class="description">
+        <%= t("settings.options.mobile_browsers.description", :link => (link_to 'm.reittiopas.fi', 'http://m.reittiopas.fi', :target => '_blank')).html_safe %>
+      </p>
+      <p class="hint"><%= t("settings.options.mobile_browsers.current_browser", :user_agent => @user_agent) %></p>
+      <div>
+        <%= text_area_tag "settings[mobile_browsers]", current_user.get_setting_value(:mobile_browsers), :rows => 6, :cols => 44 %>
+      </div>
+    </div>
     <%= submit_tag t("settings.options.save") %>
   </div>
 <% end %>

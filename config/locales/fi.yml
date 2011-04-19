@@ -49,10 +49,12 @@ fi:
       title: Asetukset
       dont_require_login: "Älä vaadi kirjautumista (suora pääsy %{username}.kiire.fi)"
       show_via_field: Näytä "kautta"-kenttä
-      mobile_reittiopas:
-        title: Reittioppaan mobiiliversio (%{link})
-        never: Käytä tavallista Reittiopasta
-        always: Käytä mobiiliversiota
+      mobile_browsers:
+        title: Mobiiliselaimet
+        description: "Kirjota tähän niiden mobiiliselainten tunnisteet, joilla haluat käyttää reittioppaan mobiiliversiota (%{link}).
+                      Yksi tunniste per rivi. Jokerimerkkinä *, eli esim. \"*Maemo*\" käy.
+                      Huomaa, että reittioppaan mobiiliversio on nirsompi paikannimien suhteen."
+        current_browser: "Nykyisen selaimesi tunniste: %{user_agent}"
       save: Tallenna
 
   places:

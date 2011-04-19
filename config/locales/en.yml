@@ -49,10 +49,12 @@ en:
       title: Options
       dont_require_login: "Don't require login (direct access via %{username}.kiire.fi)"
       show_via_field: Show "via" field
-      mobile_reittiopas:
-        title: Mobile Reittiopas (%{link})
-        never: Use regular Reittiopas
-        always: Use mobile Reittiopas
+      mobile_browsers:
+        title: Mobile browsers
+        description: "List here the mobile browsers you want to be directed to the mobile version of Reittiopas (%{link}).
+                      Put one browser identifier per line. Wildcards are accepted, e.g. \"*Maemo*\".
+                      Note that the mobile Reittiopas may be more picky about place names."
+        current_browser: "Your current browser's identifier: %{user_agent}"
       save: Save
 
   places:
