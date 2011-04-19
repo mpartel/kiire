@@ -50,12 +50,15 @@ form button {
   margin-bottom: 0.6em;
 }
 
-.radiogroup label,
-.radiogroup div.label {
+div.radiogroup label,
+div.radiogroup div.label,
+div.checkbox label,
+div.checkbox div.label {
   display: inline;
 }
 
-.radiogroup input[type=radio] {
+div.radiogroup input[type=radio],
+div.checkbox input[type=checkbox] {
   display: inline;
   margin-left: 2em;
 }
