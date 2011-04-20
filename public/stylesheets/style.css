@@ -114,6 +114,7 @@ li.place {
   border: 1px solid gray;
   padding: 10px;
   margin-left: 1em;
+  margin-bottom: 1em;
   cursor: pointer;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
