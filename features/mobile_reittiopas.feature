@@ -17,3 +17,10 @@ Feature: Mobile version of Reittiopas
     And I press "GO"
     Then I should be shown the trip from "Home" to "Work" on the mobile version
 
+  @javascript
+  Scenario: The unsupported via field is not shown even if enabled
+    Given I have logged in
+    And I have enabled the via field
+    And I have set the mobile browsers list to "*"
+    When I go to the home page
+    Then "Via" should be hidden

@@ -35,6 +35,8 @@
     <% @places.each do |place| %>
       new Place(<%= raw(place.client_attributes.to_json) %>);
     <% end %>
-    Kiire.useMobileReittiopas = <%= @mobile_browser %>;
+    <% if @mobile_browser %>
+      Kiire.useMobileReittiopas();
+    <% end %>
   });
 </script>

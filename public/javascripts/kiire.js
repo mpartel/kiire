@@ -60,7 +60,7 @@ $(document).ready(function() {
     this.from = new PlaceField('from');
     this.to = new PlaceField('to');
     this.via = $('input#via').length > 0 ? new PlaceField('via') : null;
-    this.useMobileReittiopas = false;
+    this.usingMobileReittiopas = false;
 
     this.goButton = $('button#go');
 
@@ -140,13 +140,20 @@ $(document).ready(function() {
       this.targetField.nextField.focus();
     }
 
+    this.useMobileReittiopas = function() {
+      this.usingMobileReittiopas = true;
+      if (this.via) {
+        $(this.via.container).hide();
+      }
+    }
+
     this.goNow = function() {
 
       var baseUrl;
       var params;
       var encodeParam;
 
-      if (!this.useMobileReittiopas) {
+      if (!this.usingMobileReittiopas) {
         baseUrl = 'http://www.reittiopas.fi';
         params = {
           from_in: this.from.getValue(),
