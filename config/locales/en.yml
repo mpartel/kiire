@@ -53,7 +53,7 @@ en:
         title: Mobile browsers
         description: "List here the mobile browsers you want to be directed to the mobile version of Reittiopas (%{link}).
                       Put one browser identifier per line. Wildcards are accepted, e.g. \"*Maemo*\".
-                      Note that the mobile Reittiopas may be more picky about place names."
+                      The mobile Reittiopas doesn't support the \"via\" field."
         current_browser: "Your current browser's identifier: %{user_agent}"
       save: Save
 

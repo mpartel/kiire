@@ -144,6 +144,7 @@ $(document).ready(function() {
 
       var baseUrl;
       var params;
+      var encodeParam;
 
       if (!this.useMobileReittiopas) {
         baseUrl = 'http://www.reittiopas.fi';
@@ -153,22 +154,41 @@ $(document).ready(function() {
           timetype: 'departure',
           nroutes: 5
         };
+        encodeParam = encodeURIComponent;
+
+        if (this.via && this.via.getValue() != '') {
+          params['searchformtype'] = 'advanced';
+          params['via_in'] = this.via.getValue()
+        }
       } else {
         baseUrl = 'http://aikataulut.hsl.fi/reittiopas-pda/fi/';
         params = {
           keya: this.from.getValue(),
           keyb: this.to.getValue()
         };
-      }
-
-      if (this.via && this.via.getValue() != '') {
-        params['searchformtype'] = 'advanced';
-        params['via_in'] = this.via.getValue()
+        encodeParam = function(s) {
+          s = encodeURIComponent(s);
+          var replacements = [
+            [/%C3%A4/ig, '%E4'], // ä
+            [/%C3%84/ig, '%C4'], // Ä
+            [/%C3%B6/ig, '%F6'], // ö
+            [/%C3%96/ig, '%D6'], // Ö
+            [/%C3%BC/ig, '%FC'], // ü
+            [/%C3%9C/ig, '%DC'], // Ü
+            [/%C3%A5/ig, '%E5'], // å
+            [/%C3%85/ig, '%C5']  // Å
+          ];
+          for (var i in replacements) {
+            var r = replacements[i];
+            s = s.replace(r[0], r[1]);
+          }
+          return s;
+        };
       }
 
       var queryString = [];
       $.each(params, function(key, value) {
-        queryString.push(key + '=' + encodeURIComponent(value));
+        queryString.push(key + '=' + encodeParam(value));
       });
 
       var url = baseUrl + '?' + queryString.join('&');

@@ -53,7 +53,7 @@ fi:
         title: Mobiiliselaimet
         description: "Kirjota tähän niiden mobiiliselainten tunnisteet, joilla haluat käyttää reittioppaan mobiiliversiota (%{link}).
                       Yksi tunniste per rivi. Jokerimerkkinä *, eli esim. \"*Maemo*\" käy.
-                      Huomaa, että reittioppaan mobiiliversio on nirsompi paikannimien suhteen."
+                      Reittioppaan mobiiliversio ei tue \"kautta\"-kenttää."
         current_browser: "Nykyisen selaimesi tunniste: %{user_agent}"
       save: Tallenna
 
