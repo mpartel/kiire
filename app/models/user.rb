@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :settings, :dependent => :destroy
-  has_many :places, :dependent => :destroy
+  has_many :places, :order => 'ordinal ASC', :dependent => :destroy
 
   validates :username, :presence => true
   validates_uniqueness_of :username, :case_sensitive => false
@@ -38,6 +38,35 @@ class User < ActiveRecord::Base
 
   def get_setting_value(key)
     get_setting(key).value
+  end
+
+  def move_place_after(place_to_move, after_or_nil)
+    new_places = self.places.map(&:id).to_a
+    old_index = new_places.index place_to_move.id
+    new_index =
+      if after_or_nil == nil
+      then 0
+      else new_places.index(after_or_nil.id) + 1
+      end
+
+    new_places.delete_at(old_index)
+    if new_index > old_index
+      new_index -= 1
+    end
+    new_places.insert(new_index, place_to_move.id)
+
+    # We need to conform to the uniqueness constraint of ordinals after each update.
+    # To be sure we do, we write the ordinals as negative and then
+    # switch them back to positive all at once.
+
+    db = ActiveRecord::Base.connection
+    transaction do
+      new_places.each_with_index do |id, index|
+        db.execute "UPDATE places SET ordinal = -#{index} WHERE id = #{id} AND user_id = #{self.id}"
+      end
+      db.execute "UPDATE places SET ordinal = ABS(ordinal) WHERE user_id = #{self.id}"
+    end
+    self.places.reload
   end
 
 private

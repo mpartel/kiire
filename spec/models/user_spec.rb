@@ -232,6 +232,68 @@ describe User do
     @user.places.should be_a(Enumerable)
   end
 
+  describe "places" do
+    before do
+      @user.save!
+      @p1 = Factory.create(:place, :user => @user)
+      @p2 = Factory.create(:place, :user => @user)
+      @p3 = Factory.create(:place, :user => @user)
+      @user.places.reload
+    end
+
+    it "should be ordered by creation order by default" do
+      @user.places[0].should == @p1
+      @user.places[1].should == @p2
+      @user.places[2].should == @p3
+    end
+
+    it "should be ordered by their ordinals" do
+      @p1.ordinal = @p3.ordinal + 1
+      @p1.save!
+      @user.places.reload
+
+      @user.places[0].should == @p2
+      @user.places[1].should == @p3
+      @user.places[2].should == @p1
+    end
+
+    it "can be moved after other places" do
+      @user.move_place_after(@p1, @p2)
+      @user.places[0].should == @p2
+      @user.places[1].should == @p1
+      @user.places[2].should == @p3
+
+      @user.move_place_after(@p3, @p2)
+      @user.places[0].should == @p2
+      @user.places[1].should == @p3
+      @user.places[2].should == @p1
+    end
+
+    it "can be moved to be the first place" do
+      @user.move_place_after(@p3, nil)
+      @user.places[0].should == @p3
+      @user.places[1].should == @p1
+      @user.places[2].should == @p2
+    end
+
+    it "can be moved after themselves for no effect" do
+      def check_order
+        @user.places[0].should == @p1
+        @user.places[1].should == @p2
+        @user.places[2].should == @p3
+      end
+
+      @user.move_place_after(@p1, nil)
+      check_order
+      @user.move_place_after(@p1, @p1)
+      check_order
+      @user.move_place_after(@p2, @p2)
+      check_order
+      @user.move_place_after(@p3, @p3)
+      check_order
+    end
+  end
+
   describe "when destroyed" do
     before do
       @user.save!

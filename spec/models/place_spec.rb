@@ -33,6 +33,13 @@ describe Place do
       @place.name = nil
       @place.should have(1).error_on(:name)
     end
+
+    it "should require an unambiguous ordering" do
+      @place.save!
+      place2 = Factory.build(:place, :user => @place.user)
+      place2.ordinal = @place.ordinal
+      place2.should have(1).error_on(:ordinal)
+    end
   end
 
   describe "#get_setting" do

@@ -3,6 +3,7 @@ class Place < ActiveRecord::Base
   has_many :settings, :class_name => 'PlaceSetting'
 
   validates :name, :presence => true
+  validates :ordinal, :uniqueness => { :scope => :user_id }
 
   def get_setting(key, backend = nil)
     backend = backend.name if backend.is_a?(Class)
