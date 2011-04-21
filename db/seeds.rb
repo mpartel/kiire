@@ -7,15 +7,17 @@ setting = demouser.get_setting('dont_require_login')
 setting.value = '1'
 setting.save!
 
-rautatientori = demouser.places.create!(:name => 'Rautatieasema')
-koulu = demouser.places.create!(:name => 'Koulu')
+demouser.places.create!(:name => 'Rautatieasema')
+koulu = demouser.places.create!(:name => 'TKTL')
 koti = demouser.places.create!(:name => 'Koti')
+kaisla = demouser.places.create!(:name => 'Kaisla')
 lansisatama = demouser.places.create!(:name => 'Länsisatama')
-itakeskus = demouser.places.create!(:name => 'Itäkeskus')
+demouser.places.create!(:name => 'Itäkeskus')
 
 
-koulu.settings.create!(:backend => 'reittiopas', :key => 'address_for', :value => 'Kumpulan Kampus, Helsinki')
+koulu.settings.create!(:backend => 'reittiopas', :key => 'address_for', :value => 'Kumpulan kampus')
 koti.settings.create!(:backend => 'reittiopas', :key => 'address_for', :value => 'Mäkkylä')
+kaisla.settings.create!(:backend => 'reittiopas', :key => 'address_for', :value => 'Vilhonkatu 4')
 lansisatama.settings.create!(:backend => 'reittiopas', :key => 'address_for', :value => nil)
 
 require File.join(File.dirname(__FILE__), 'seeds.development.rb') if Rails.env.development?
