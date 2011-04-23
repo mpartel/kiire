@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
     db = ActiveRecord::Base.connection
     transaction do
       new_places.each_with_index do |id, index|
-        db.execute "UPDATE places SET ordinal = -#{index} WHERE id = #{id} AND user_id = #{self.id}"
+        db.execute "UPDATE places SET ordinal = -#{index + 1} WHERE id = #{id} AND user_id = #{self.id}"
       end
       db.execute "UPDATE places SET ordinal = ABS(ordinal) WHERE user_id = #{self.id}"
     end

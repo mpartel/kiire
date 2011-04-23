@@ -235,9 +235,9 @@ describe User do
   describe "places" do
     before do
       @user.save!
-      @p1 = Factory.create(:place, :user => @user)
-      @p2 = Factory.create(:place, :user => @user)
-      @p3 = Factory.create(:place, :user => @user)
+      @p1 = Factory.create(:place, :user => @user, :ordinal => 0)
+      @p2 = Factory.create(:place, :user => @user, :ordinal => 1)
+      @p3 = Factory.create(:place, :user => @user, :ordinal => 2)
       @user.places.reload
     end
 
@@ -274,6 +274,13 @@ describe User do
       @user.places[0].should == @p3
       @user.places[1].should == @p1
       @user.places[2].should == @p2
+    end
+
+    it "can be moved from the first place" do
+      @user.move_place_after(@p1, @p2)
+      @user.places[0].should == @p2
+      @user.places[1].should == @p1
+      @user.places[2].should == @p3
     end
 
     it "can be moved after themselves for no effect" do
