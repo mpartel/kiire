@@ -16,6 +16,15 @@ describe Place do
     @place.settings.new.should be_a(PlaceSetting)
   end
 
+  it "should be the last in the place list when created" do
+    p1 = Factory.create(:place)
+    p2 = Factory.create(:place)
+    @place = Place.new(:name => 'new_place', :user => p2.user)
+    @place.save!
+    @place.ordinal.should > p1.ordinal
+    @place.ordinal.should > p2.ordinal
+  end
+
   it "should save place settings when saved" do
     ps = Factory.build(:place_setting, :place => @place)
     @place.settings << ps

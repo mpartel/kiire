@@ -5,6 +5,8 @@ class Place < ActiveRecord::Base
   validates :name, :presence => true
   validates :ordinal, :uniqueness => { :scope => :user_id }
 
+  before_create :set_default_ordinal
+
   def get_setting(key, backend = nil)
     backend = backend.name if backend.is_a?(Class)
     setting = settings.find(:first, :conditions => { :key => key, :backend => backend })
@@ -34,5 +36,13 @@ protected
       target[setting.key] = setting.value
     end
     return result
+  end
+
+  def set_default_ordinal
+    if ordinal == 0
+      db = ActiveRecord::Base.connection
+      sql = "SELECT MAX(ordinal) + 1 AS o FROM places WHERE user_id = #{user_id}"
+      self.ordinal = db.select_value(sql) || 1
+    end
   end
 end

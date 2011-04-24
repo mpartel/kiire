@@ -235,9 +235,9 @@ describe User do
   describe "places" do
     before do
       @user.save!
-      @p1 = Factory.create(:place, :user => @user, :ordinal => 0)
-      @p2 = Factory.create(:place, :user => @user, :ordinal => 1)
-      @p3 = Factory.create(:place, :user => @user, :ordinal => 2)
+      @p1 = Factory.create(:place, :user => @user, :ordinal => 1)
+      @p2 = Factory.create(:place, :user => @user, :ordinal => 2)
+      @p3 = Factory.create(:place, :user => @user, :ordinal => 3)
       @user.places.reload
     end
 
