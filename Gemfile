@@ -10,6 +10,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 1.0'
   gem 'cucumber', '~> 0.10'
   gem 'cucumber-rails', '~> 0.4'
+  gem 'launchy'  # for save_and_open_page in capybara
   gem 'capybara', '~> 0.4'
   gem 'database_cleaner', '~> 0.6'
   gem 'jquery-rails', '~> 0.2'
