@@ -24,3 +24,19 @@ Given /^"([^\"]*)" has saved a place "([^\"]*)"$/ do |username, name|
   user = User.find_by_username(username)
   Factory.create(:place, :user => user, :name => name)
 end
+
+Then /^I should see "([^"]*)" before "([^"]*)"$/ do |place1, place2|
+  places = all(:css, "li.place")
+  i1 = nil
+  i2 = nil
+  places.each_with_index do |place, i|
+    i1 = i if place.text.strip == place1
+    i2 = i if place.text.strip == place2
+  end
+  if i1 && i2
+    fail("#{place1} was not before #{place2}") if i1 >= i2
+  else
+    fail("No such place: " + place1) if !i1
+    fail("No such place: " + place2) if !i2
+  end
+end

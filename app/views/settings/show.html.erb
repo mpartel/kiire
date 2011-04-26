@@ -1,3 +1,10 @@
+<%= javascript_include_tag 'settings.js' %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    setupPlaceMovementGui('<%= (place_position_url :place_id => ':place_id').html_safe %>');
+  });
+</script>
 
 <h1><%= t("settings.title") %></h1>
 
@@ -7,8 +14,8 @@
 <% unless @places.empty? %>
   <table id="places-manager">
     <% @places.each do |place| %>
-      <tr>
-        <td>
+      <tr id="place-<%= place.id %>" class="place">
+        <td class="name">
           <%= place.name  %>
         </td>
         <td class="edit">
