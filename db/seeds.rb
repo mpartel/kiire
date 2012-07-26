@@ -1,4 +1,4 @@
-
+# -*- coding: UTF-8 -*-
 demouser = User.create!(:username => 'demo',
                         :password => nil,
                         :password_confirmation => nil)

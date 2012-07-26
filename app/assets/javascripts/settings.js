@@ -71,12 +71,14 @@ function setupPlaceMovementGui(positionUrlPattern) {
 
             $row.fadeIn('slow');
           });
-        }
+        };
+
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         if (val != '') {
           $.ajax({
             url: placePositionUrl(thisId),
-            data: {below: val},
+            data: {below: val, 'authenticity_token': csrfToken},
             dataType: 'text',
             type: 'PUT',
             success: function(data) {

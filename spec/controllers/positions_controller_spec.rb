@@ -3,10 +3,9 @@ require 'spec_helper'
 describe PositionsController do
   describe "#update" do
     before do
-      @user = mock_model(User)
+      @user = FactoryGirl.create(:user)
       stub_current_user(@user)
-      @places = (1..3).map {|n| mock_model(Place, :id => n) }
-      @user.stub_chain(:places, :find).and_return {|id| @places[id - 1] }
+      @places = (1..3).map {|n| FactoryGirl.create(:place, :id => n, :user => @user) }
     end
     
     describe "given a valid move-below request" do

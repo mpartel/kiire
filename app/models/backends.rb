@@ -1,4 +1,4 @@
-require 'lib/backends/reittiopas.rb'
+require 'backends/reittiopas'
 
 module Backends
   Default = Backends::Reittiopas unless const_defined? 'Default'

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Setting do
   before do
-    @setting = Factory.build(:setting)
+    @setting = FactoryGirl.build(:setting)
   end
 
   it "should belong to a user" do
@@ -32,8 +32,8 @@ describe Setting do
 
     it "needs to have a unique key in the scope of its user" do
       @setting.save!
-      s2 = Factory.build(:setting, :user => @setting.user)
-      s3 = Factory.build(:setting, :user => @setting.user, :key => @setting.key)
+      s2 = FactoryGirl.build(:setting, :user => @setting.user)
+      s3 = FactoryGirl.build(:setting, :user => @setting.user, :key => @setting.key)
 
       s2.should be_valid
       s3.should_not be_valid
@@ -42,6 +42,8 @@ describe Setting do
 
   describe "::default_value" do
     before do
+      Setting.clear_cache
+
       configuration = {
         'foo' => 'bar',
         'boo' => {

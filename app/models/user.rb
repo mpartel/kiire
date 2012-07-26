@@ -1,3 +1,5 @@
+require 'digest'
+
 class User < ActiveRecord::Base
   has_many :settings, :dependent => :destroy
   has_many :places, :order => 'ordinal ASC', :dependent => :destroy
@@ -11,6 +13,8 @@ class User < ActiveRecord::Base
   validate :password_not_an_empty_string
   before_save :attempt_password_reset
 
+  attr_accessible :username, :password, :password_confirmation, :email
+
   def self.authenticate(username, password)
     hash = hash_password(password)
     exact_match = User.find_by_username_and_password_hash(username, hash)
@@ -22,9 +26,8 @@ class User < ActiveRecord::Base
   end
 
   def self.hash_password(plaintext)
-    require 'rubygems'
-    require 'digest'
-    Digest::SHA1.hexdigest(plaintext.to_s)
+    # TODO: add salt. Preserve old passwords with a migration.
+    Digest::SHA1.hexdigest(plaintext.to_s).encode('UTF-8')
   end
 
   def self.find_by_username_case_insensitive(username)

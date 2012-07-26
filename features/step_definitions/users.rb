@@ -1,6 +1,6 @@
 
 Given /^there exists a user "([^\"]*)"$/ do |username|
-  Factory.create(:user, :username => username)
+  FactoryGirl.create(:user, :username => username)
 end
 
 Then /^a user "([^\"]*)" has been created$/ do |username|

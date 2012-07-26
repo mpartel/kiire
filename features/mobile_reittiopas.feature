@@ -15,6 +15,7 @@ Feature: Mobile version of Reittiopas
     And I click on the place "Home"
     And I click on the place "Work"
     And I press "GO"
+    And I wait for the page to load
     Then I should be shown the trip from "Home" to "Work" on the mobile version
 
   @javascript

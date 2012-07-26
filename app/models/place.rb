@@ -5,11 +5,13 @@ class Place < ActiveRecord::Base
   validates :name, :presence => true
   validates :ordinal, :uniqueness => { :scope => :user_id }
 
+  attr_accessible :name, :ordinal
+
   before_create :set_default_ordinal
 
   def get_setting(key, backend = nil)
     backend = backend.name if backend.is_a?(Class)
-    setting = settings.find(:first, :conditions => { :key => key, :backend => backend })
+    setting = settings.where(:key => key, :backend => backend).first
     setting = settings.new(:key => key, :backend => backend) unless setting
     return setting
   end

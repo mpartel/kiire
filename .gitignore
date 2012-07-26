@@ -1,7 +1,9 @@
-.bundle
-db/*.sqlite3
-log/*.log
-tmp/*
-tmp/**/*
-nbproject
-.project
+/db/*.sqlite3
+/log/*.log
+/tmp/*
+/tmp/**/*
+/public/assets/*
+
+/nbproject
+/.project
+/.idea

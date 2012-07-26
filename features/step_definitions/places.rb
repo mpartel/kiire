@@ -17,12 +17,12 @@ Then /^I should be shown the trip from "([^"]*)" to "([^"]*)" on the mobile vers
 end
 
 Given /^I have saved a place "([^\"]*)"$/ do |name|
-  Factory.create(:place, :user => current_user, :name => name)
+  FactoryGirl.create(:place, :user => current_user, :name => name)
 end
 
 Given /^"([^\"]*)" has saved a place "([^\"]*)"$/ do |username, name|
   user = User.find_by_username(username)
-  Factory.create(:place, :user => user, :name => name)
+  FactoryGirl.create(:place, :user => user, :name => name)
 end
 
 Then /^I should see "([^"]*)" before "([^"]*)"$/ do |place1, place2|

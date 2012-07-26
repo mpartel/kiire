@@ -1,4 +1,4 @@
-require 'lib/backends/backend.rb'
+require 'backends/backend'
 
 module Backends
   class Reittiopas < Backend

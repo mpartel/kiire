@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PlaceSetting do
   before do
-    @ps = Factory.build(:place_setting)
+    @ps = FactoryGirl.build(:place_setting)
   end
 
   it "belongs to a place" do
@@ -56,7 +56,7 @@ describe PlaceSetting do
 
     it "should require that the key is not a duplicate (for the place and backend)" do
       @ps.save
-      ps2 = Factory.build(:place_setting,
+      ps2 = FactoryGirl.build(:place_setting,
                           :place_id => @ps.place_id,
                           :key => @ps.key,
                           :backend => @ps.backend)

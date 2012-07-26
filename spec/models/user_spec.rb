@@ -1,9 +1,10 @@
+# -*- coding: UTF-8 -*-
 require 'spec_helper'
 
 describe User do
 
   before do
-    @user = Factory.build(:user)
+    @user = FactoryGirl.build(:user)
   end
 
   describe "when validating" do
@@ -24,14 +25,14 @@ describe User do
 
       it "must be unique" do
         @user.save!
-        user2 = Factory.build(:user, :username => @user.username)
+        user2 = FactoryGirl.build(:user, :username => @user.username)
         user2.should have(1).error_on(:username)
       end
 
       it "must be unique case-insensitively" do
         @user.username = 'jussi'
         @user.save!
-        user2 = Factory.build(:user, :username => 'Jussi')
+        user2 = FactoryGirl.build(:user, :username => 'Jussi')
         user2.should have(1).error_on(:username)
       end
 
@@ -130,7 +131,7 @@ describe User do
 
   describe "authentication" do
     it "should return the user if the given user and password are correct" do
-      hashed_password = Digest::SHA1.hexdigest('hello')
+      hashed_password = Digest::SHA1.hexdigest('hello').encode('UTF-8')
       @user.password_hash = hashed_password
       @user.save!
 
@@ -141,7 +142,7 @@ describe User do
 
     it "should be case-insensitive with the username" do
       @user.username = 'jussi'
-      hashed_password = Digest::SHA1.hexdigest('hello')
+      hashed_password = Digest::SHA1.hexdigest('hello').encode('UTF-8')
       @user.password_hash = hashed_password
       @user.save!
 
@@ -184,7 +185,7 @@ describe User do
   end
 
   it "should save its settings when saved" do
-    setting = Factory.build(:setting, :user => @user)
+    setting = FactoryGirl.build(:setting, :user => @user)
     @user.settings << setting
     setting.should be_new_record
     @user.save
@@ -204,7 +205,7 @@ describe User do
 
     describe "when the setting exists" do
       it "should return the setting" do
-        setting = Factory.create(:setting, :user => @user, :key => 'foo')
+        setting = FactoryGirl.create(:setting, :user => @user, :key => 'foo')
         @user.get_setting(:foo).should == setting
       end
     end
@@ -221,7 +222,7 @@ describe User do
 
     describe "when the setting exists" do
       it "should return the setting" do
-        setting = Factory.create(:setting, :user => @user, :key => 'foo', :value => 'boo')
+        setting = FactoryGirl.create(:setting, :user => @user, :key => 'foo', :value => 'boo')
         @user.get_setting_value(:foo).should == 'boo'
       end
     end
@@ -235,9 +236,9 @@ describe User do
   describe "places" do
     before do
       @user.save!
-      @p1 = Factory.create(:place, :user => @user, :ordinal => 1)
-      @p2 = Factory.create(:place, :user => @user, :ordinal => 2)
-      @p3 = Factory.create(:place, :user => @user, :ordinal => 3)
+      @p1 = FactoryGirl.create(:place, :user => @user, :ordinal => 1)
+      @p2 = FactoryGirl.create(:place, :user => @user, :ordinal => 2)
+      @p3 = FactoryGirl.create(:place, :user => @user, :ordinal => 3)
       @user.places.reload
     end
 
@@ -307,14 +308,14 @@ describe User do
     end
 
     it "should destroy its settings" do
-      setting = Factory.create(:setting, :user => @user)
+      setting = FactoryGirl.create(:setting, :user => @user)
       @user.settings.should include(setting)
       @user.destroy
       Setting.exists?(setting.id).should be_false
     end
 
     it "should destroy its places" do
-      place = Factory.create(:place, :user => @user)
+      place = FactoryGirl.create(:place, :user => @user)
       @user.places.should include(place)
       @user.destroy
       Place.exists?(place.id).should be_false

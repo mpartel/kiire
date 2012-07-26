@@ -1,3 +1,7 @@
+/*
+ *= require_self
+ */
+
 body {
   background-color: white;
   font-family: "Georgia", "Helvetica", "Arial", sans-serif;
@@ -65,6 +69,10 @@ div.checkbox input[type=checkbox] {
 
 form.edit_place input[type=text] {
   width: 26em;
+}
+
+div.form-errors {
+  color: red;
 }
 
 input[type=button],

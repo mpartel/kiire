@@ -3,11 +3,12 @@ class Setting < ActiveRecord::Base
   validates :user, :presence => true
   validates :key, :presence => true
   validates_uniqueness_of :key, :scope => :user_id
+  attr_accessible :key, :value
 
   DEFAULT_SETTINGS_PATH = File.join(Rails.root, 'config', 'default_settings.yml')
 
   def self.default_value(key)
-    @default_settings = YAML.load_file(DEFAULT_SETTINGS_PATH) unless @default_settings
+    @default_settings ||= YAML.load_file(DEFAULT_SETTINGS_PATH)
     
     key = key.to_s
     
@@ -21,5 +22,9 @@ class Setting < ActiveRecord::Base
     end
     
     return p
+  end
+
+  def self.clear_cache
+    @default_settings = nil
   end
 end

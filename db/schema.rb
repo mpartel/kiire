@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20110421072649) do
     t.text     "backend"
     t.text     "key",        :null => false
     t.text     "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "place_settings", ["place_id", "key", "backend"], :name => "index_place_settings_on_place_id_and_key_and_backend", :unique => true
@@ -26,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20110421072649) do
   create_table "places", :force => true do |t|
     t.integer  "user_id",                   :null => false
     t.text     "name",                      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "ordinal",    :default => 0, :null => false
   end
 
@@ -37,16 +38,16 @@ ActiveRecord::Schema.define(:version => 20110421072649) do
     t.integer  "user_id",    :null => false
     t.text     "key",        :null => false
     t.text     "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
     t.text     "username",      :null => false
     t.text     "password_hash"
     t.text     "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

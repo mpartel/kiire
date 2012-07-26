@@ -1,4 +1,4 @@
-require 'lib/backends.rb'
+require 'backends'
 
 class PlaceSetting < ActiveRecord::Base
   belongs_to :place
@@ -7,6 +7,8 @@ class PlaceSetting < ActiveRecord::Base
   validates :key, :presence => true
   validates_uniqueness_of :key, :scope => [:place_id, :backend]
   validate :backend_must_exist
+
+  attr_accessible :backend, :key, :value
 
   def backend=(new_backend)
     if new_backend.is_a?(Class)

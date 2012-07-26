@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'settings.js' %>
+<%= javascript_include_tag 'settings' %>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -25,7 +25,7 @@
           <%= link_to t("settings.places.delete"), place,
                       :method => :delete,
                       :class => :delete,
-                      :confirm => t("settings.places.confirm_delete", :place => h(place.name)) %>
+                      :data => { :confirm => t("settings.places.confirm_delete", :place => h(place.name)) } %>
         </td>
       </tr>
     <% end %>

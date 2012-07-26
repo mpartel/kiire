@@ -7,8 +7,12 @@ Given /^I have logged in(?: as "([^"]*)")?$/ do |username|
   current_user.password = 'furniture'
   current_user.password_confirmation = 'furniture'
   current_user.save!
-  
+
   visit path_to("the homepage")
+  if page.has_content?('Log out')
+    click_link 'Log out'
+  end
+
   page.should have_content("Username")
   fill_in "Username", :with => current_user.username
   fill_in "Password", :with => current_user.password

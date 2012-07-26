@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Place do
 
   before do
-    @place = Factory.build(:place)
+    @place = FactoryGirl.build(:place)
   end
 
   it "should belong to a user" do
@@ -17,16 +17,17 @@ describe Place do
   end
 
   it "should be the last in the place list when created" do
-    p1 = Factory.create(:place)
-    p2 = Factory.create(:place)
-    @place = Place.new(:name => 'new_place', :user => p2.user)
+    p1 = FactoryGirl.create(:place)
+    p2 = FactoryGirl.create(:place)
+    @place = p2.user.places.new(:name => 'new_place')
     @place.save!
+    @place.user.should == p2.user
     @place.ordinal.should > p1.ordinal
     @place.ordinal.should > p2.ordinal
   end
 
   it "should save place settings when saved" do
-    ps = Factory.build(:place_setting, :place => @place)
+    ps = FactoryGirl.build(:place_setting, :place => @place)
     @place.settings << ps
     ps.should be_new_record
     @place.save
@@ -45,37 +46,9 @@ describe Place do
 
     it "should require an unambiguous ordering" do
       @place.save!
-      place2 = Factory.build(:place, :user => @place.user)
+      place2 = FactoryGirl.build(:place, :user => @place.user)
       place2.ordinal = @place.ordinal
       place2.should have(1).error_on(:ordinal)
-    end
-  end
-
-  describe "#get_setting" do
-    before do
-      @backend = mock(Class)
-      @backend.stub!(:is_a?).with(Class).and_return(true)
-      @backend.stub!(:name => 'my_backend')
-
-      @result = mock(Object)
-    end
-
-    it "should return an existing setting given a key" do
-      @place.settings.should_receive(:find).twice.with(:first, :conditions => { :key => 'foo', :backend => 'my_backend' }).and_return(@result)
-      @place.get_setting('foo', @backend).should == @result
-      @place.get_setting('foo', 'my_backend').should == @result
-    end
-
-    it "should return a new setting given a key to a nonexistent setting" do
-      @place.settings.should_receive(:find).twice.with(:first, :conditions => { :key => 'foo', :backend => 'my_backend' }).and_return(nil)
-      @place.settings.should_receive(:new).twice.with(:key => 'foo', :backend => 'my_backend').and_return(@result)
-      @place.get_setting('foo', @backend).should == @result
-      @place.get_setting('foo', 'my_backend').should == @result
-    end
-
-    it "should default to a nil backend" do
-      @place.settings.should_receive(:find).with(:first, :conditions => { :key => 'foo', :backend => nil }).and_return(@result)
-      @place.get_setting('foo').should == @result
     end
   end
 
