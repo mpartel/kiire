@@ -40,8 +40,8 @@ Feature: Managing places
     When I follow "edit" within "td.edit"
     And I fill in "Zork" for "Name"
     And I press "Save"
-    And I follow "Back"
-    Then I should be on the settings page
+    Then I should see "Place updated"
+    And I should be on the settings page
     And I should see "Zork"
     But I should not see "Work"
 
@@ -52,8 +52,7 @@ Feature: Managing places
     When I fill in "Mannerheimintie 3 B" for "Address for Reittiopas"
     And I press "Save"
     Then I should see "Place updated"
-    When I follow "Back"
-    Then I should be on the settings page
+    And  I should be on the settings page
     And I should see "Aukio"
     But I should not see "Mannerheimintie 3 B"
 
