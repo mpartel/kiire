@@ -44,7 +44,7 @@ describe PlacesController do
     describe "when successful" do
       it "should redirect to the edit page" do
         put_update
-        response.should redirect_to(edit_place_path(@place))
+        response.should redirect_to(settings_path)
       end
 
       it "should show a success message" do

@@ -39,7 +39,7 @@ class PlacesController < ApplicationController
     @place.update_attributes(params[:place])
     if @place.save
       flash[:success] = t("places.place_updated")
-      redirect_to edit_place_path(@place)
+      redirect_to settings_path
     else
       render :edit
     end
