@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_authorization
 
-protected
-
+private
   def check_authorization
     must_be_logged_in
   end

@@ -7,5 +7,6 @@ Kiire::Application.routes.draw do
     resource :position
   end
   resource :info
+  resource :cache_poke, :defaults => { :format => 'text' }
   match ':username' => 'index#index', :as => :user_places
 end
