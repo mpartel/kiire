@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 3.2.11'
 gem 'sqlite3'
 gem 'jquery-rails'
 
@@ -10,6 +10,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
+  gem 'libv8', '3.11.8.11', :platforms => :ruby # Explicit dep until https://github.com/cowboyd/therubyracer/issues/189 is resolved
 
   gem 'uglifier', '>= 1.0.3'
 end
